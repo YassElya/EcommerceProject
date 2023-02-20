@@ -12,7 +12,7 @@ The software we will develop will have 5 databases: balloons, items, clients, st
   - Balloons will store different types of balloons, based on color, size, shape, and more.
   - Items will store extra items our client uses in her 'bouquets'. Some examples would include plushies, ribbons, and       baskets.
   - Clients will simply consists of her clients, as well as different methods to contact them.
-  - Status will have the order numbers, the status of the order, and the client's name.
+  - Status will have the order numbers, the status of the order, and the client's id.
   - Orders will be the big database that links them all together. It will take from balloons and items what it needs for     said order, the client's name from the client database and the status of the order from the orders database.
 
 The different pages will include a simple login page, a main menu page, different pages for the databases (one to view/search and another to edit for each, for a total of 9, as the orders database cannot be modified), a report page, and an options page.
