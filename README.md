@@ -21,3 +21,37 @@ The different pages will include a simple login page, a main menu page, differen
   - She can choose to click on the sidebar and reveal all 5 databases. From there, by default, the view for her destination   will come up. A button will be available to switch from view to edit at any time once on the database page.
   - The report page will consits of a montly update on where she earned and spent the most money (ex: what balloons were     more popular/unpopular, what items were used, what clients are regulars, etc.). It will also give her the total earnings   of that month.
   - The options page will contain a simple theme change depending on the client's wishes.
+
+## Features
+### Feature 1:
+- Log in
+### Feature 2:
+- Log out
+### Feature 3:
+- insert product or item
+### Feature 4:
+- update product or item
+### Feature 5:
+- delete product or item
+### Feature 6:
+- view product or item
+### Feature 7:
+- critics reponse
+### Feature 8:
+- rating products and items
+### Feature 9:
+- Search product or item
+### Feature 10:
+- filter products or item
+### Feature 11:
+- calendar
+### Feature 12:
+- Update status
+### Feature 13:
+- view product status
+### Feature 14:
+- 2 factors authentication
+### Feature 15:
+- 
+### Feature 16:
+-
