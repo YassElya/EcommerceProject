@@ -46,12 +46,12 @@ The different pages will include a simple login page, a main menu page, differen
 ### Feature 11:
 - Link to bargin Balloons and Balloon Online (her supplies)
 ### Feature 12:
-- New Order web page, a simple way to insert into all databases
+- Add/Update/Delete her supplier list
 ### Feature 13:
-- Orders DB will automattically form/update with information from other databases
+- New Order web page, a simple way to insert into all databases
 ### Feature 14:
-- Internalization (FR and ENG)
+- Orders DB will automattically form/update with information from other databases
 ### Feature 15:
-- 2 Factor Authentication
+- Internalization (FR and ENG)
 ### Feature 16:
-- 
+- 2 Factor Authentication
