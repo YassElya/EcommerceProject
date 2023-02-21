@@ -24,34 +24,34 @@ The different pages will include a simple login page, a main menu page, differen
 
 ## Features
 ### Feature 1:
-- Log in
+- Login (Logout)
 ### Feature 2:
-- Log out
+- Add balloons/items/clients/status DB
 ### Feature 3:
-- insert product or item
+- Update balloons/items/clients/status DB
 ### Feature 4:
-- update product or item
+- Delete balloons/items/clients/status DB
 ### Feature 5:
-- delete product or item
+- View balloons/items/clients/status/orders DB
 ### Feature 6:
-- view product or item
+- Search balloons/items/clients/status/orders DB
 ### Feature 7:
-- critics reponse
+- Filtering and Sorting balloons/items/clients/status/orders DB
 ### Feature 8:
-- rating products and items
+- Web page to show what's low in stock
 ### Feature 9:
-- Search product or item
+- Past Orders (DB but not sure)
 ### Feature 10:
-- filter products or item
+- Report Page (monthly idea of spendings and earnings)
 ### Feature 11:
-- calendar
+- Link to bargin Balloons and Balloon Online (her supplies)
 ### Feature 12:
-- Update status
+- New Order web page, a simple way to insert into all databases
 ### Feature 13:
-- view product status
+- Orders DB will automattically form/update with information from other databases
 ### Feature 14:
-- 2 factors authentication
+- Internalization (FR and ENG)
 ### Feature 15:
-- 
+- 2 Factor Authentication
 ### Feature 16:
--
+- 
