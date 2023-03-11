@@ -1,7 +1,7 @@
-Feature: Add cookies to the application
+Feature: Add Cookies to the Application
 
     Scenario: The cookies store data
-    Given the user or the admin uses the application
+    Given the user uses the application
     Then the application creates the cookies
     Then the cookies store the data
-    Then after some time they expire
+    Then after some time the cookies expire
