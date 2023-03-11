@@ -1,9 +1,8 @@
-Feature: 2 factor authentication
+Feature: 2 Factor Authentication
 
   Scenario: user login verification (2FA)
     Given the user logs in
     Then the user sees 2 options
     Given the user chooses QR code
-    Then he scans it with his phone
-    And gets redirected to the user home page
-    
+    Then they scan it with their phone
+    And get redirected to the user home page
