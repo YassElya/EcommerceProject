@@ -1,8 +1,8 @@
-Feature: inserting items
+Feature: Inserting Items
 
-    Scenario: Admin inserts items in the inventory
-    Given the admin is already logged in
-    When he gets a new product
-    Then he may insert it in the inventory
+  Scenario: User inserts items in the inventory
+    Given the user is already logged in
+    When they get a new product
+    Then they may insert it in the inventory
     And the item must be visible
-    When he checks the stock
+    When they checks the stock
