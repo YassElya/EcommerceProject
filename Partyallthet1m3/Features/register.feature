@@ -1,8 +1,8 @@
-Feature: User register
+Feature: User Register
 
-  Scenario: user regiser
-    Given User wants to register
-    Then create his username
-    And create his password
-    When he clicks on register button
-    Then gets redirected to the user login page
+  Scenario: User regiser
+    Given user wants to register
+    Then creates their username
+    And creates their password
+    When they click on register button
+    Then get redirected to the user login page
