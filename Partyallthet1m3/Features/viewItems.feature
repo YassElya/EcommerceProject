@@ -1,9 +1,10 @@
-Feature: View items as an admin
+Feature: View Items
 In order to view my items
-As an admin
+As an user
 It must be inserted first
+
     Scenario:
-    Given the admin wants to see his items
-    Then he must log in 
-    Then he can view his items if they exist in the inventory
-    When there's no item he won't be able to view any item
+        Given the uer wants to see their items
+        Then they must be logged in 
+        Then they can view their items if they exist in the inventory
+        When there is no item they won't be able to view any item
