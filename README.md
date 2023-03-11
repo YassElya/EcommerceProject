@@ -8,50 +8,47 @@ Sonia Vetra and Yassine El Yamani
 Our team will create an inventory system to help our client stay organized and updated on her items.
 
 She owns a small balloon business, where she makes 'bouquets' or balloons for special occasions (parties, retirements, etc.). She opperates from home, alone, and currently keeps track of her stock via Excel, which can get pretty messy. This is where our web application comes in.
-The software we will develop will have 5 databases: balloons, items, clients, status, and orders.
+The software we will develop will have 5 databases related to her inventory and orders: balloons, items, clients, status, and orders.
   - Balloons will store different types of balloons, based on color, size, shape, and more.
-  - Items will store extra items our client uses in her 'bouquets'. Some examples would include plushies, ribbons, and       baskets.
+  - Items will store extra items our client uses in her 'bouquets'. Some examples would include plushies, ribbons, and baskets.
   - Clients will simply consists of her clients, as well as different methods to contact them.
-  - Status will have the order numbers, the status of the order, and the client's id.
-  - Orders will be the big database that links them all together. It will take from balloons and items what it needs for     said order, the client's name from the client database and the status of the order from the orders database.
+  - Status will have the order numbers and the status of the order.
+  - Orders will be the big table that links them all together. It will take from balloons and items what it needs for said order, the client's name from the client table and the status of the order from the status table.
 
-The different pages will include a simple login page, a main menu page, different pages for the databases (one to view/search and another to edit for each, for a total of 9, as the orders database cannot be modified), a report page, and an options page.
-  - The login page will have a welcome message and request only a password. As our client is the only one to use our         software, she doesn't need to waste time with a username, but it should still have a basic security measure.
-  - The main menu will be set by default to view the order table. On the left, there will be a sidebar from which she can     choose to access any other pages from the system. That sidebar will always be there, and from it she will navigate the     web application.
-  - She can choose to click on the sidebar and reveal all 5 databases. From there, by default, the view for her destination   will come up. A button will be available to switch from view to edit at any time once on the database page.
-  - The report page will consits of a montly update on where she earned and spent the most money (ex: what balloons were     more popular/unpopular, what items were used, what clients are regulars, etc.). It will also give her the total earnings   of that month.
-  - The options page will contain a simple theme change depending on the client's wishes.
+The different pages will include a simple login/register page, a menu sidebar once logged in, different pages for the tables (to view/search and another to add/update/delete for each), a report page, a past orders page, a low stock page, and a new order/delete order page. The menu sidebar would be present at every screen to keep an easy flow throughout the web application. If a table is choosen, a page with its view will appear and some buttons will allow the user to modify or search through it. The Past Orders Page will have square containers which are formed with a picture (which the user needs to upload to the web application) and the sell price of that order.
+
+Basic tables will be the following -> Balloons, Items, Clients, and Status tables
 
 ## Features
 ### Feature 1:
-- Login (Logout)
+- Login/Logout
 ### Feature 2:
-- Add balloons/items/clients/status/supplier DB
+- Register as a user (username and password)
 ### Feature 3:
-- Update balloons/items/clients/status/supplier DB
+- Add to basic tables
 ### Feature 4:
-- Delete balloons/items/clients/status/supplier DB
+- Update basic tables
 ### Feature 5:
-- View balloons/items/clients/status/orders/supplier DB
+- Delete from basic tables
 ### Feature 6:
-- Search balloons/items/clients/status/orders/supplier DB
+- View basic tables
 ### Feature 7:
-- Filtering and Sorting balloons/items/clients/status/orders/supplier DB
+- Search with filter in basic tables
 ### Feature 8:
-- Web page to show what's low in stock
+- Low Stock Page (reads from Balloons and Items tables and returns data)
 ### Feature 9:
 - Report Page (monthly idea of spendings and earnings)
 ### Feature 10:
-- New Order/Delete Order web page, a simple way to insert/delete ALL databases
+- New Order/Delete Order Page (a simple way to insert/delete all basic tables)
 ### Feature 11:
-- Orders DB will automattically form/update with information from other databases
+- Orders table will automatically form/update by reading information from basic tables
 ### Feature 12:
-- Internalization (FR and ENG)
+- Past Orders Page
 ### Feature 13:
-- 2 Factor Authentication
+- Favorite option in Past Orders Page that user can toggle
 ### Feature 14:
-- Register option at the login page
+- 2 Factor Authentication
 ### Feature 15:
-- 
+- Internalization (FR and ENG)
 ### Feature 16:
-- 
+- Cookies (save username and password)
