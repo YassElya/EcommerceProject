@@ -21,34 +21,34 @@ Basic tables will be the following -> Balloons, Items, Clients, and Status table
 
 ## Features
 ### Feature 1:
-- Login/Logout
+- Login/Logout: The user will need a username and password (which will be stored in the Admins table) to acces the application. Once they enter their login information, they can also logout.
 ### Feature 2:
-- Register as a user (username and password)
+- Register as a user: The user can register. They will enter their desired username and password (password needs to pass some standards, if not, it will be refused) and the information will be stored in the Admins table. They will then be able to login to access the application. This feature is in place with the idea that our client would like to expend her business and may hire associates in the future.
 ### Feature 3:
-- Add to basic tables
+- Add to basic tables: The user will be able to add information to the basic tables.
 ### Feature 4:
-- Update basic tables
+- Update basic tables: The user will be able to update information from the basic tables.
 ### Feature 5:
-- Delete from basic tables
+- Delete from basic tables: The user will be able to delete information from the basic tables.
 ### Feature 6:
-- View basic tables
+- View basic tables: The user will be able to view information from the basic tables.
 ### Feature 7:
-- Search with filter in basic tables
+- Search within in basic tables: The user will be able to search for information from the basic tables. It will act like a simple search tool. If the user enters 'bl' in the Balloons table search, they will recieve the view of any balloon that has 'Blue' or 'Black' as their color.
 ### Feature 8:
-- Low Stock Page (reads from Balloons and Items tables and returns data)
+- Low Stock Page: The user will be able to view the balloons and items which are low in stock (ex: <5 for balloons and <2 for items).
 ### Feature 9:
-- Report Page (monthly idea of spendings and earnings)
+- Report Page: The user will have access to a Report made with information thoughout the month. It will save data like the best selling balloons/items, the amount spend on supplies, gross earnings and net earning. If our client wants anything specific, we can also add it in the future.
 ### Feature 10:
-- New Order/Delete Order Page (a simple way to insert/delete all basic tables)
+- New Order/Delete Order Page: The user will have access to these pages to add a full order, or to delete one. If they are creating one, they will be asked for information such as client, balloons/items needs, sell price, and more. This data will all be added in the tables at the same time. To delete an order, the client will simply need to enter an order ID.
 ### Feature 11:
-- Orders table will automatically form/update by reading information from basic tables
+- Orders table: This table isn't prebuild. instead, it is formed dynamically with information in the other tables. This table is used as a simple way to view the client's current projects. 
 ### Feature 12:
-- Past Orders Page
+- Past Orders Page: The user will be able to see pictures and sell prices of orders they've done in the past. It will allow them to keep track of price points and past designs.
 ### Feature 13:
-- Favorite option in Past Orders Page that user can toggle
+- Favorite option in Past Orders Page: The user will be able to favorite a past order, so it will have an extra heart in the corner of the image. On that page, they will be able to toggle 'Favorite' mode to see only favorited orders.
 ### Feature 14:
-- 2 Factor Authentication
+- 2 Factor Authentication ?
 ### Feature 15:
-- Internalization (FR and ENG)
+- Internalization/Localization (FR/QC and ENG/Canada) ?
 ### Feature 16:
-- Cookies (save username and password)
+- Cookies: The web application will keep track of the user's username and password if they so desire.
