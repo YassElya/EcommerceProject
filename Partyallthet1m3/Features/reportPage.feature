@@ -1,9 +1,9 @@
-Feature: The report page
+Feature: The Report Page
 
-    Scenario: The admin accesses the report page
-    Given The admin is logged in
-    Then he wants to know everything about his company's profit throughout the month
-    When he clicks on a report page link or button
-    Then he must be redirected to it
-    When he is in the page he must see the best selling balloons/items
-    And other info about his earnings
+    Scenario: The user accesses the report page
+        Given the user is logged in
+        Then they want to know everything about their company's profit throughout the month
+        When they click on a report page button
+        Then they must be redirected to it
+        When they are in the page they must see the best selling balloons/items
+        And other info about their earnings
