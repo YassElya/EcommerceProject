@@ -1,9 +1,8 @@
-Feature: Deleting order process
-In order to be satisfied
-As a client
+Feature: Deleting Order Process
+As a user
 I must be able to delete an order
 
     Scenario:
-    Given I don't want to purchase the product anymore
-    Then I must click on a button
-    And it removes the product from my cart
+    Given my client cancels an order
+    Then I must click enter an order id
+    And it removes the order from the database
