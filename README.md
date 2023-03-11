@@ -45,10 +45,10 @@ Basic tables will be the following -> Balloons, Items, Clients, and Status table
 ### Feature 12:
 - Past Orders Page: The user will be able to see pictures and sell prices of orders they've done in the past. It will allow them to keep track of price points and past designs.
 ### Feature 13:
-- Favorite option in Past Orders Page: The user will be able to favorite a past order, so it will have an extra heart in the corner of the image. On that page, they will be able to toggle 'Favorite' mode to see only favorited orders.
+- Favorite option in Past Orders Page: The user will be able to favorite a past order, so it will have an extra heart in the corner of the image. On that page, they will be able to toggle 'Favorite' mode to see only favorite orders.
 ### Feature 14:
-- 2 Factor Authentication ?
+- 2 Factor Authentication: Once the user is logged in, The web application will ask the user to choose an option and the user will either get an sms with a code, gmail with a code, or he might scan a QR code. All of those steps are needed to make sure that the person who tried to log in is the correct user and not another one trying to access his information.  
 ### Feature 15:
-- Internalization/Localization (FR/QC and ENG/Canada) ?
+- Internationalization/Localization (FR/QC and ENG/Canada): It is used to make the webapplication easy to understand for the user. For example, if the user doesn't understand english he may choose to change the language to French or another language. Or another example, in some the phone number format is different so we use localization to make sure that phone number format is convenient to the country it's located in.
 ### Feature 16:
 - Cookies: The web application will keep track of the user's username and password if they so desire.
