@@ -3,6 +3,7 @@ The name of the company: partyallthet1m3
 
 ## Team members
 Sonia Vetra and Yassine El Yamani
+[Our Repository](https://github.com/YassElya/EcommerceProject)
 
 ## Description of project
 Our team will create an inventory system to help our client stay organized and updated on her items.
