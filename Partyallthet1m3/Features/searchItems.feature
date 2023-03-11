@@ -1,5 +1,5 @@
 Feature: Search items or products
-In order to find for items or products
+In order to find items or products
 As a client or an admin
 I want to be able to search for that item or product
     
