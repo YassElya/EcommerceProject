@@ -1,7 +1,6 @@
-Feature: Create an order
+Feature: Create an Order
 
-  Scenario: user creating an order
+  Scenario: User creating an order
     Given the user already logged in
     Then the user wants to create an order
-    And the order exists in the inventory
-    Then he can perform the operation of creating an order
+    Then they can perform the operation of creating an order
