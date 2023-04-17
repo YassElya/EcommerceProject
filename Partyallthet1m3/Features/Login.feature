@@ -1,14 +1,14 @@
-Feature: Login/Logout
+Feature: Login/logout
 
   Scenario: user login
     Given User wants to login
-    Then enters their username
-    And enters their password
-    When they click on the login button
-    Then get redirected to the user home page
+    Then enters his username
+    And enters his password
+    When he clicks on login button
+    Then gets redirected to the home page
 
   Scenario: user logout
     Given User wants to logout
-    When they are finished with the application
-    Then they click on the logout button
-    Then get redirected to the user login page
+    When he is finished with the application
+    Then he clicks on the logout button
+    Then gets redirected to the login page
