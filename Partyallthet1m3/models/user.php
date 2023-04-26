@@ -1,8 +1,8 @@
 <?php
 
-    require(dirname(__DIR__)."/core/dbconnectionmanager.php");
+require_once(dirname(__DIR__)."/core/dbconnectionmanager.php");
 
-class User{
+class User {
 
     private $id;
     private $fname;
@@ -13,7 +13,7 @@ class User{
     private $dbConnection;
 
     function __construct(...$attributes){
-        $conManager = new DBConnectionManager();
+        $conManager = new \database\DBConnectionManager();
         $this->dbConnection = $conManager->getConnection();
         if(!empty($attributes)){
             $this->id=$attributes[0];

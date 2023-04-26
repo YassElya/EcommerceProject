@@ -1,5 +1,7 @@
 <?php
 
+    namespace database;
+
     class DBConnectionManager {
 
         private $username;
@@ -18,10 +20,10 @@
 
             try {
 
-                $this->dbConnection = new PDO("mysql:host=$this->server;dbname=$this->dbname",
+                $this->dbConnection = new \PDO("mysql:host=$this->server;dbname=$this->dbname",
                 $this->username, $this->password);
 
-            } catch(PDOException $e) {
+            } catch(\PDOException $e) {
 
                 echo "Connection failed: " . $e->getMessage();
 

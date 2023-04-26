@@ -1,9 +1,9 @@
 <?php
     
     namespace controllers;
-    require(dirname(__DIR__) . "/models/balloon.php");
+    require(dirname(__DIR__) . "/models/client.php");
 
-    class BalloonController {
+    class ClientController {
         
         function __construct() {
 
@@ -12,19 +12,19 @@
 
                     $action = $_GET['action'];
 
-                    $viewClass = "\\views\\"."Balloons".ucfirst($action);
+                    $viewClass = "\\views\\"."Clients".ucfirst($action);
 
-                    $balloon = new \models\Balloon();
+                    $client = new \models\Client();
 
-                    $balloons = $balloon->getAll();
+                    $clients = $client->getAll();
 
-                    $actionClass = "\\views\\balloons".$action;
+                    $actionClass = "\\views\\clients".$action;
                     
                     if (class_exists($actionClass)) {
 
                         $view = new $viewClass();
 
-                        $view->render($balloons);
+                        $view->render($clients);
 
                     }
                 }   

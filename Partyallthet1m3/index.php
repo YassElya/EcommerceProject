@@ -1,5 +1,7 @@
 <?php
 
+    //http://localhost/EcommerceProject/Partyallthet1m3/index.php?resource=admin&action=login
+
     spl_autoload_register(
         
         function ($class) {
@@ -25,9 +27,7 @@
                     }
                 }   
             }
-
         }
-
     }
 
     // Test

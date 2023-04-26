@@ -1,5 +1,5 @@
 <?php
-require(dirname(__DIR__) . "/core/dbconnectionmanager.php");
+require_once(dirname(__DIR__) . "/core/dbconnectionmanager.php");
 
 class items{
     private $item_id;
@@ -7,8 +7,10 @@ class items{
     private $amount;
     private $price;
 
+    private $dbConnection;
+
     function __construct(){
-        $DBConnManager = new DBConnectionManager();
+        $DBConnManager = new \database\DBConnectionManager();
         $this->dbConnection = $DBConnManager->getConnection(); 
     }
 
