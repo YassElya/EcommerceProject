@@ -41,10 +41,12 @@
                                 :root {
                                     --black: rgba(0,2,0,1);
                                     --granite-gray: rgba(104, 104, 104, 1);
+                                    --granite-gray2: rgba(64, 64, 64, 1);
                                     --silver-chalice: rgba(175,175, 175, 1);
                                     --white: rgba(255,255,255,1);
                     
                                     --font-size-m: 20px;
+                                    --font-size-s: 16px;
                     
                                     --font-family-inter: "Inter";
                                 }
@@ -66,17 +68,6 @@
                                     flex-direction: column;
                                     justify-content: space-between;
                                 }
-                                .side-bar-label {
-                                    background-color: var(--black);
-                                    height: 50px;
-                                    width: 215px;
-                                    border-radius: 15px;
-                                    margin: 12px;
-                                    padding-left: 10px;
-                                    vertical-align: middle;
-                                    line-height: 50px;
-                                    cursor: default;
-                                }
                                 .side-bar-label-text {
                                     color: var(--white);
                                     font-family: var(--font-family-inter);
@@ -86,9 +77,8 @@
                                     padding-top: 25px;
                                     padding-bottom: 25px;
                                 }
-                                .side-bar-labels-top {
+                                .side-bar-label-solo {
                                     background-color: var(--black);
-                                    height: 50px;
                                     width: 225px;
                                     border-radius: 15px;
                                     margin: 12px 12px 0px 12px;
@@ -104,7 +94,35 @@
                                     border-style: none;
                                     cursor: pointer;
                                 }
-                                #lower-button {
+                                .side-bar-label-title {
+                                    background-color: var(--black);
+                                    height: 50px;
+                                    width: 215px;
+                                    border-radius: 15px;
+                                    margin: 12px 12px 0px 12px;
+                                    padding-left: 10px;
+                                    vertical-align: middle;
+                                    line-height: 50px;
+                                    cursor: default;
+                                }
+                                .side-bar-label-subtitle {
+                                    background-color: var(--granite-gray2);
+                                    width: 180px;
+                                    border-radius: 15px;
+                                    margin: 6px 12px 0px 55px;
+                                    padding-left: 10px;
+                                    vertical-align: middle;
+                                    line-height: 40px;
+                                    color: var(--white);
+                                    font-family: var(--font-family-inter);
+                                    font-size: var(--font-size-s);
+                                    font-weight: 600;
+                                    font-style: normal;
+                                    text-align: left;
+                                    border-style: none;
+                                    cursor: pointer;
+                                }
+                                .side-bar-label-bottom {
                                     background-color: var(--black);
                                     height: 50px;
                                     width: 225px;
@@ -222,24 +240,32 @@
                         <body class="body">
                                     <div class="entire-screen">
                                         <div class="side-bar">
-                                            <div class="upper-buttons">
-                                                <button class="side-bar-labels-top" onClick="location.assign(\'index.php?resource=order&action=list\')">Orders</button>
-                                                <button class="side-bar-labels-top" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Inventory</button>
-                                                <button class="side-bar-labels-top" onClick="location.assign(\'index.php?resource=client&action=list\')">Clients</button>
-                                                <div class="side-bar-label">
-                                                    <span class="side-bar-label-text">Manage Orders</span>
+                                            <div>
+                                                <button class="side-bar-label-solo" onClick="location.assign(\'index.php?resource=order&action=list\')">Orders</button>
+                                                <div class="side-bar-label-title">
+                                                    <span class="side-bar-label-text">Inventory:</span>
                                                 </div>
-                                                <div class="side-bar-label">
-                                                    <span class="side-bar-label-text">Low Stock</span>
+                                                <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Balloons</button>
+                                                <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=item&action=list\')">Items</button>
+                                                <button class="side-bar-label-solo" onClick="location.assign(\'index.php?resource=client&action=list\')">Clients</button>
+                                                <div class="side-bar-label-title">
+                                                    <span class="side-bar-label-text">Manage Orders:</span>
                                                 </div>
-                                                <div class="side-bar-label">
-                                                    <span class="side-bar-label-text">Past Orders</span>
+                                                <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">New Order</button>
+                                                <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Delete Order</button>
+                                                <button class="side-bar-label-solo" onClick="location.assign(\'index.php?resource=order&action=list\')">Low Stock</button>
+                                                <div class="side-bar-label-title">
+                                                    <span class="side-bar-label-text">Past Orders:</span>
                                                 </div>
-                                                <div class="side-bar-label">
-                                                    <span class="side-bar-label-text">Reports</span>
+                                                <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">All Past Orders</button>
+                                                <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Favorite Past Order</button>
+                                                <div class="side-bar-label-title">
+                                                    <span class="side-bar-label-text">Reports:</span>
                                                 </div>
+                                                <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Current Report</button>
+                                                <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Past Reports</button>
                                             </div>
-                                            <button id="lower-button" onClick="location.assign(\'index.php?resource=admin&action=logout\')">Log Out</button>
+                                            <button class="side-bar-label-bottom" id="lower-button" onClick="location.assign(\'index.php?resource=admin&action=logout\')">Log Out</button>
                                         </div>
                                         <div class="content">
                                             <div class="content-buttons">

@@ -1,9 +1,9 @@
 <?php
     
     namespace controllers;
-    require(dirname(__DIR__) . "/models/items.php");
+    require(dirname(__DIR__) . "/models/item.php");
 
-    class ItemsController {
+    class ItemController {
         
         function __construct() {
 
@@ -12,28 +12,24 @@
 
                     $action = $_GET['action'];
 
+                    $viewClass = "\\views\\"."Items".ucfirst($action);
+
+                    $item = new \models\Item();
+
+                    $items = $item->getAll();
+
                     $actionClass = "\\views\\items".$action;
                     
-                    if (class_exists($actionClass)) {}
+                    if (class_exists($actionClass)) {
+
+                        $view = new $viewClass();
+
+                        $view->render($items);
+
+                    }
                 }   
             }
-
         }
-
-        function userInputItem(){
-            if(isset($_POST)){
-                if(isset($_POST['submit'])){
-                    $this->item_type = $_POST['type'];
-                    $this->amount = $_POST['amount'];
-                    $this->price = $_POST['price'];
-                    $item = new items();
-                    $item->storeItem($this->item_type,$this->amount,$this->price);
-                }else{
-                    echo "Data inserting failed.";
-                }
-            }
-        }
-
     }
 
 ?>

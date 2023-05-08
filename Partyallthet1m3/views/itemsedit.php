@@ -2,7 +2,7 @@
 
     namespace views;
 
-    class BalloonsEdit {
+    class ItemsEdit {
 
         /*private $user;
         private $welcomeMessage;             
@@ -38,16 +38,16 @@
                 }
             }
 
-            $temp_balloon = new \models\Balloon();
+            $temp_item = new \models\Item();
 
-            $b = $temp_balloon->getRow($rowId)[0];
+            $i = $temp_item->getRow($rowId)[0];
 
             if (isset($_POST['update'])) {
 
-                $fullBalloon = new \models\Balloon($rowId, $_POST['name'], $_POST['brand'], $_POST['size'], $_POST['material'], $_POST['fill_type'], $_POST['quantity_per_bag'], $_POST['price_per_bag'], $_POST['price_per_unit'], $_POST['total_remaining']);
-                $result = $fullBalloon->updateRow();
+                $fullItem = new \models\Item($rowId, $_POST['name'], $_POST['brand'], $_POST['size'], $_POST['quantity_per_bag'], $_POST['price_per_bag'], $_POST['price_per_unit'], $_POST['total_remaining']);
+                $result = $fullItem->updateRow();
                 if ($result) {
-                    header('location: index.php?resource=balloon&action=list');
+                    header('location: index.php?resource=item&action=list');
                 } else {
                     echo "Error!";
                 }
@@ -272,55 +272,43 @@
                                                 <div class="edit-label">
                                                     <span class="edit-label-text">Name:</span>
                                                 </div>
-                                                <input class="editing-label-text" type="text" id="name" name="name" value="' . $b["name"] . '">
+                                                <input class="editing-label-text" type="text" id="name" name="name" value="' . $i["name"] . '">
                                             </div>
                                             <div class="editing-row">
                                                 <div class="edit-label">
                                                     <span class="edit-label-text">Brand:</span>
                                                 </div>
-                                                <input class="editing-label-text" type="text" id="brand" name="brand" value="' . $b["brand"] . '">
+                                                <input class="editing-label-text" type="text" id="brand" name="brand" value="' . $i["brand"] . '">
                                             </div>
                                             <div class="editing-row">
                                                 <div class="edit-label">
                                                     <span class="edit-label-text">Size:</span>
                                                 </div>
-                                                <input class="editing-label-text" type="text" id="size" name="size" value="' . $b["size"] . '">
-                                            </div>
-                                            <div class="editing-row">
-                                                <div class="edit-label">
-                                                    <span class="edit-label-text">Material:</span>
-                                                </div>
-                                                <input class="editing-label-text" type="text" id="material" name="material" value="' . $b["material"] . '">
-                                            </div>
-                                            <div class="editing-row">
-                                                <div class="edit-label">
-                                                    <span class="edit-label-text">Fill Type:</span>
-                                                </div>
-                                                <input class="editing-label-text" type="text" id="fill_type" name="fill_type" value="' . $b["fill_type"] . '">
+                                                <input class="editing-label-text" type="text" id="size" name="size" value="' . $i["size"] . '">
                                             </div>
                                             <div class="editing-row">
                                                 <div class="edit-label">
                                                     <span class="edit-label-text">Quantity per Bag:</span>
                                                 </div>
-                                                <input class="editing-label-text" type="text" id="quantity_per_bag" name="quantity_per_bag" value="' . $b["quantity_per_bag"] . '">
+                                                <input class="editing-label-text" type="text" id="quantity_per_bag" name="quantity_per_bag" value="' . $i["quantity_per_bag"] . '">
                                             </div>
                                             <div class="editing-row">
                                                 <div class="edit-label">
                                                     <span class="edit-label-text">Price per Bag:</span>
                                                 </div>
-                                                <input class="editing-label-text" type="text" id="price_per_bag" name="price_per_bag" value="' . $b["price_per_bag"] . '">
+                                                <input class="editing-label-text" type="text" id="price_per_bag" name="price_per_bag" value="' . $i["price_per_bag"] . '">
                                             </div>
                                             <div class="editing-row">
                                                 <div class="edit-label">
                                                     <span class="edit-label-text">Price per Unit:</span>
                                                 </div>
-                                                <input class="editing-label-text" type="text" id="price_per_unit" name="price_per_unit" value="' . $b["price_per_unit"] . '">
+                                                <input class="editing-label-text" type="text" id="price_per_unit" name="price_per_unit" value="' . $i["price_per_unit"] . '">
                                             </div>
                                             <div class="editing-row">
                                                 <div class="edit-label">
                                                     <span class="edit-label-text">Total Remaining:</span>
                                                 </div>
-                                                <input class="editing-label-text" type="text" id="total_remaining" name="total_remaining" value="' . $b["total_remaining"] . '">
+                                                <input class="editing-label-text" type="text" id="total_remaining" name="total_remaining" value="' . $i["total_remaining"] . '">
                                             </div>
                                         </div>
                                         <div>

@@ -137,7 +137,7 @@ input[type="submit"]:hover{
 .signup_link a:hover{
   text-decoration: underline;
 }
-    </style>
+    </style>s
 
 
 <?php

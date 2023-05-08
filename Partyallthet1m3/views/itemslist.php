@@ -2,27 +2,20 @@
 
     namespace views;
 
-    class BalloonsEdit {
+    class ItemsList {
 
-        /*private $user;
-        private $welcomeMessage;             
+        /*private $admin;            
 
-        public function __construct($user) {
+        public function __construct($admin) {
 
-            $this->user = $user;
+            $this->admin = $admin;
 
-            echo var_dump($this->user);
+            $membershipProvider = $this->admin->getMembershipProvider();
 
-            $membershipProvider = $this->user->getMembershipProvider();
-
-            if ($membershipProvider->isLoggedIn()) {
-
-                $this->welcomeMessage = 'Welcome ' . $this->user->getUsername() . '!'; 
-
-            } else {
+            if (!($membershipProvider->isLoggedIn())) {
 
                 header('HTTP/1.1 401 Unauthorized');
-                header('location: http://localhost/myApp/index.php?resource=user&action=login');
+                header('location: http://localhost/Partyallthet1m3/index.php?resource=admin&action=login');
 
             }
 
@@ -30,27 +23,12 @@
 
         function render(...$data) {
 
-            $rowId = 0;
-            if (isset($_GET)) {
-                if (isset($_GET['resourceid'])) {
-                    $rowId = $_GET['resourceid'];
-                    $rowId = (int)$rowId;
-                }
-            }
-
-            $temp_balloon = new \models\Balloon();
-
-            $b = $temp_balloon->getRow($rowId)[0];
+            $items = $data[0];
 
             if (isset($_POST['update'])) {
-
-                $fullBalloon = new \models\Balloon($rowId, $_POST['name'], $_POST['brand'], $_POST['size'], $_POST['material'], $_POST['fill_type'], $_POST['quantity_per_bag'], $_POST['price_per_bag'], $_POST['price_per_unit'], $_POST['total_remaining']);
-                $result = $fullBalloon->updateRow();
-                if ($result) {
-                    header('location: index.php?resource=balloon&action=list');
-                } else {
-                    echo "Error!";
-                }
+                header('location: index.php?resource=item&action=edit&resourceid='. $_POST['updateid'] .'');
+            } else if (isset($_POST['delete'])) {
+                header('location: index.php?resource=item&action=delete&resourceid='. $_POST['deleteid'] .'');
             }
 
             $html = '<html>
@@ -60,8 +38,8 @@
                                     --black: rgba(0,2,0,1);
                                     --granite-gray: rgba(104, 104, 104, 1);
                                     --granite-gray2: rgba(64, 64, 64, 1);
-                                    --silver-chalice: rgba(175,175, 175, 1);
-                                    --white: rgba(255,255,255,1);
+                                    --silver-chalice: rgba(175, 175, 175, 1);
+                                    --white: rgba(255, 255, 255, 1);
                     
                                     --font-size-m: 20px;
                                     --font-size-s: 16px;
@@ -163,58 +141,31 @@
                                     margin: 10px;
                                     flex: 1;
                                     overflow: auto;
-                                }
-                                .editing-section {
-                                    height: 100%;
                                     display: flex;
                                     flex-direction: column;
+                                }
+                                .content-buttons {
+                                    display: flex;
                                     justify-content: space-between;
                                 }
-                                .editing-row {
-                                    display: flex;
-                                }
-                                .edit-label, .completed {
+                                .button {
                                     background-color: #454545;
                                     height: 50px;
                                     width: 215px;
                                     border-radius: 15px;
                                     margin: 12px;
-                                    padding-left: 10px;
+                                    text-align: center;
                                     vertical-align: middle;
                                     line-height: 50px;
-                                    cursor: default;
                                 }
-                                .edit-label-text {
+                                .buttons-text {
                                     color: var(--white);
                                     font-family: var(--font-family-inter);
                                     font-size: var(--font-size-m);
                                     font-weight: 600;
                                     font-style: normal;
-                                }
-                                .editing-label {
-                                    background-color: #454545;
-                                    height: 50px;
-                                    width: 215px;
-                                    border-radius: 15px;
-                                    margin: 12px;
-                                    padding-left: 10px;
-                                    vertical-align: middle;
-                                    line-height: 50px;
-                                }
-                                .editing-label-text {
-                                    background-color: #454545;
-                                    height: 50px;
-                                    width: 430px;
-                                    border-radius: 15px;
-                                    margin: 12px;
-                                    padding-left: 10px;
-                                    vertical-align: middle;
-                                    line-height: 50px;
-                                    color: var(--white);
-                                    font-family: var(--font-family-inter);
-                                    font-size: var(--font-size-m);
-                                    font-weight: 600;
-                                    font-style: normal;
+                                    padding-top: 25px;
+                                    padding-bottom: 25px;
                                 }
                                 .completed-text {
                                     background-color: #454545;
@@ -231,6 +182,53 @@
                                     font-style: normal;
                                     border-style: none;
                                     cursor: pointer;
+                                }
+                                .modify-button-text {
+                                    background-color: #454545;
+                                    height: 50px;
+                                    width: 75px;
+                                    border-radius: 15px;
+                                    margin: 12px;
+                                    text-align: center;
+                                    vertical-align: middle;
+                                    line-height: 50px;
+                                    color: var(--white);
+                                    font-family: var(--font-family-inter);
+                                    font-size: var(--font-size-m);
+                                    font-weight: 600;
+                                    font-style: normal;
+                                    cursor: text;
+                                }
+                                .table {
+                                    background-color: var(--white);
+                                    width: 100%;
+                                    border: 5px solid var(--black);
+                                    table-layout: fixed;
+                                    border-collapse: collapse;
+                                    cursor: default;
+                                }
+                                table th, td {
+                                    border-left: 2px solid var(--black);
+                                }
+                                table td:first-child {
+                                    border-left: none;
+                                }
+                                .heading {
+                                    background-color: #454545;
+                                    height: 75px;
+                                    font-size: var(--font-size-m);
+                                }
+                                th {
+                                    color: white;
+                                    text-align: center;
+                                    border-bottom: 2px solid var(--black);
+                                }
+                                td {
+                                    padding: 5px;
+                                    text-align: left;
+                                }
+                                tr:nth-child(even) {
+                                    background-color: #e0e0e0;
                                 }
                             </style>
                         </head>
@@ -266,74 +264,62 @@
                                     <button class="side-bar-label-bottom" id="lower-button" onClick="location.assign(\'index.php?resource=admin&action=logout\')">Log Out</button>
                                 </div>
                                 <div class="content">
-                                    <form class="editing-section" method="post">
-                                        <div>
-                                            <div class="editing-row">
-                                                <div class="edit-label">
-                                                    <span class="edit-label-text">Name:</span>
-                                                </div>
-                                                <input class="editing-label-text" type="text" id="name" name="name" value="' . $b["name"] . '">
-                                            </div>
-                                            <div class="editing-row">
-                                                <div class="edit-label">
-                                                    <span class="edit-label-text">Brand:</span>
-                                                </div>
-                                                <input class="editing-label-text" type="text" id="brand" name="brand" value="' . $b["brand"] . '">
-                                            </div>
-                                            <div class="editing-row">
-                                                <div class="edit-label">
-                                                    <span class="edit-label-text">Size:</span>
-                                                </div>
-                                                <input class="editing-label-text" type="text" id="size" name="size" value="' . $b["size"] . '">
-                                            </div>
-                                            <div class="editing-row">
-                                                <div class="edit-label">
-                                                    <span class="edit-label-text">Material:</span>
-                                                </div>
-                                                <input class="editing-label-text" type="text" id="material" name="material" value="' . $b["material"] . '">
-                                            </div>
-                                            <div class="editing-row">
-                                                <div class="edit-label">
-                                                    <span class="edit-label-text">Fill Type:</span>
-                                                </div>
-                                                <input class="editing-label-text" type="text" id="fill_type" name="fill_type" value="' . $b["fill_type"] . '">
-                                            </div>
-                                            <div class="editing-row">
-                                                <div class="edit-label">
-                                                    <span class="edit-label-text">Quantity per Bag:</span>
-                                                </div>
-                                                <input class="editing-label-text" type="text" id="quantity_per_bag" name="quantity_per_bag" value="' . $b["quantity_per_bag"] . '">
-                                            </div>
-                                            <div class="editing-row">
-                                                <div class="edit-label">
-                                                    <span class="edit-label-text">Price per Bag:</span>
-                                                </div>
-                                                <input class="editing-label-text" type="text" id="price_per_bag" name="price_per_bag" value="' . $b["price_per_bag"] . '">
-                                            </div>
-                                            <div class="editing-row">
-                                                <div class="edit-label">
-                                                    <span class="edit-label-text">Price per Unit:</span>
-                                                </div>
-                                                <input class="editing-label-text" type="text" id="price_per_unit" name="price_per_unit" value="' . $b["price_per_unit"] . '">
-                                            </div>
-                                            <div class="editing-row">
-                                                <div class="edit-label">
-                                                    <span class="edit-label-text">Total Remaining:</span>
-                                                </div>
-                                                <input class="editing-label-text" type="text" id="total_remaining" name="total_remaining" value="' . $b["total_remaining"] . '">
-                                            </div>
+                                    <div class="content-buttons">
+                                        <div class="add-button">
+                                            <button class="completed-text" onClick="location.assign(\'index.php?resource=item&action=add\')">Add</button>
                                         </div>
                                         <div>
-                                            <input class="completed-text" type="submit" name="update" value="Change Values">
+                                            <form method="post">
+                                                <input class="modify-button-text" type="text" name="updateid" value="">
+                                                <button class="completed-text" type="submit" name="update">Update Row</button>
+                                            </form>
                                         </div>
-                                    </form>
-                                </div>
-                            </div>
+                                        <div>
+                                            <form method="post">
+                                                <input class="modify-button-text" type="text" name="deleteid" value="">
+                                                <button class="completed-text" type="submit" name="delete">Delete Row</button>
+                                            </form>
+                                        </div>
+                                        <div class="button">
+                                            <span class="buttons-text">Search</span>
+                                        </div>
+                                    </div>
+                                    <table class="table">
+                                        <tr class="heading">
+                                            <th>Item ID</th>
+                                            <th>Name</th>
+                                            <th>Brand</th>
+                                            <th>Size</th>
+                                            <th>Quantity per Bag</th>
+                                            <th>Price per Bag</th>
+                                            <th>Price per Unit</th>
+                                            <th>Total Left</th>
+                                        </tr>';
+
+            $counter = 1;
+            foreach ($items as $i) {
+
+                $html .= '<tr>
+                            <td>' . $i['item_id'] . '</td>
+                            <td>' . $i['name'] . '</td>
+                            <td>' . $i['brand'] . '</td>
+                            <td>' . $i['size'] . '</td>
+                            <td>' . $i['quantity_per_bag'] . '</td>
+                            <td>' . $i['price_per_bag'] . '</td>
+                            <td>' . $i['price_per_unit'] . '</td>
+                            <td>' . $i['total_remaining'] . '</td>
+                        </tr>';
+
+                $counter++;
+            }
+
+            $html .= '</table>
+                        </div>
+                        </div>
                         </body>
-                    </html>';
+                        </html>';
 
-        echo $html;
-
+            echo $html;
         }
     }
 
