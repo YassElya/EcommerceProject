@@ -26,9 +26,13 @@
             $clients = $data[0];
 
             if (isset($_POST['update'])) {
-                header('location: http://localhost/EcommerceProject/Partyallthet1m3/index.php?resource=client&action=edit&resourceid='. $_POST['updateid'] .'');
+                if($_POST['updateid']!=''){
+                    header('location: index.php?resource=client&action=edit&resourceid='. $_POST['updateid'] .'');
+                }
             } else if (isset($_POST['delete'])) {
-                header('location: http://localhost/EcommerceProject/Partyallthet1m3/index.php?resource=client&action=delete&resourceid='. $_POST['deleteid'] .'');
+                if($_POST['deleteid']!=''){
+                    header('location: index.php?resource=client&action=delete&resourceid='. $_POST['deleteid'] .'');
+                }
             }
 
             $html = '<html>
@@ -71,6 +75,7 @@
                                     padding-left: 10px;
                                     vertical-align: middle;
                                     line-height: 50px;
+                                    cursor: default;
                                 }
                                 .side-bar-label-text {
                                     color: var(--white);
@@ -97,8 +102,9 @@
                                     font-style: normal;
                                     text-align: left;
                                     border-style: none;
+                                    cursor: pointer;
                                 }
-                                .side-bar-labels {
+                                #lower-button {
                                     background-color: var(--black);
                                     height: 50px;
                                     width: 225px;
@@ -113,9 +119,8 @@
                                     font-style: normal;
                                     padding-bottom: 25px;
                                     border-style: none;
-                                }
-                                #lower-button {
                                     text-align: center;
+                                    cursor: pointer;
                                 }
                                 .content {
                                     background-color: var(--black);
@@ -148,6 +153,22 @@
                                     padding-top: 25px;
                                     padding-bottom: 25px;
                                 }
+                                .completed-text {
+                                    background-color: #454545;
+                                    height: 50px;
+                                    width: 215px;
+                                    border-radius: 15px;
+                                    margin: 12px;
+                                    vertical-align: middle;
+                                    line-height: 50px;
+                                    color: var(--white);
+                                    font-family: var(--font-family-inter);
+                                    font-size: var(--font-size-m);
+                                    font-weight: 600;
+                                    font-style: normal;
+                                    border-style: none;
+                                    cursor: pointer;
+                                }
                                 .modify-button-text {
                                     background-color: #454545;
                                     height: 50px;
@@ -162,22 +183,7 @@
                                     font-size: var(--font-size-m);
                                     font-weight: 600;
                                     font-style: normal;
-                                }
-                                .side-bar-labels {
-                                    background-color: var(--black);
-                                    height: 50px;
-                                    width: 225px;
-                                    border-radius: 15px;
-                                    margin: 12px;
-                                    vertical-align: middle;
-                                    line-height: 50px;
-                                    color: var(--white);
-                                    font-family: var(--font-family-inter);
-                                    font-size: var(--font-size-m);
-                                    font-weight: 600;
-                                    font-style: normal;
-                                    padding-bottom: 25px;
-                                    border-style: none;
+                                    cursor: text;
                                 }
                                 .table {
                                     background-color: var(--white);
@@ -185,6 +191,7 @@
                                     border: 5px solid var(--black);
                                     table-layout: fixed;
                                     border-collapse: collapse;
+                                    cursor: default;
                                 }
                                 table th, td {
                                     border-left: 2px solid var(--black);
@@ -209,21 +216,6 @@
                                 tr:nth-child(even) {
                                     background-color: #e0e0e0;
                                 }
-                                .completed-text {
-                                    background-color: #454545;
-                                    height: 50px;
-                                    width: 215px;
-                                    border-radius: 15px;
-                                    margin: 12px;
-                                    vertical-align: middle;
-                                    line-height: 50px;
-                                    color: var(--white);
-                                    font-family: var(--font-family-inter);
-                                    font-size: var(--font-size-m);
-                                    font-weight: 600;
-                                    font-style: normal;
-                                    border-style: none;
-                                }
                             </style>
                         </head>
                         
@@ -247,7 +239,7 @@
                                                     <span class="side-bar-label-text">Reports</span>
                                                 </div>
                                             </div>
-                                            <button class="side-bar-labels" id="lower-button" onClick="location.assign(\'index.php?resource=admin&action=logout\')">Log Out</button>
+                                            <button id="lower-button" onClick="location.assign(\'index.php?resource=admin&action=logout\')">Log Out</button>
                                         </div>
                                         <div class="content">
                                             <div class="content-buttons">

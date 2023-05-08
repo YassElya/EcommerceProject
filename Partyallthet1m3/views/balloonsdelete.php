@@ -18,7 +18,7 @@
 
             $result = $fullBalloon->deleteRow($rowId);
             if ($result) {
-                header('location: http://localhost/EcommerceProject/Partyallthet1m3/index.php?resource=balloon&action=list');
+                header('location: index.php?resource=balloon&action=list');
             } else {
                 echo "Error!";
             }

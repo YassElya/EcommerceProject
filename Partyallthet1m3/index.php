@@ -1,6 +1,9 @@
 <?php
 
-    //http://localhost/EcommerceProject/Partyallthet1m3/index.php?resource=admin&action=login
+    //http://localhost/Partyallthet1m3/index.php?resource=client&action=list (full CRUD operations)
+    //http://localhost/Partyallthet1m3/index.php?resource=balloon&action=list (another example of a view)
+    //http://localhost/Partyallthet1m3/index.php?resource=order&action=list
+    //http://localhost/Partyallthet1m3/index.php?resource=admin&action=login
 
     spl_autoload_register(
         

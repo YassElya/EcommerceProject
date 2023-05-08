@@ -65,6 +65,7 @@
                                     padding-left: 10px;
                                     vertical-align: middle;
                                     line-height: 50px;
+                                    cursor: pointer;
                                 }
                                 .side-bar-label-text {
                                     color: var(--white);
@@ -91,6 +92,7 @@
                                     font-style: normal;
                                     text-align: left;
                                     border-style: none;
+                                    cursor: pointer;
                                 }
                                 .side-bar-labels {
                                     background-color: var(--black);
@@ -107,6 +109,7 @@
                                     font-style: normal;
                                     padding-bottom: 25px;
                                     border-style: none;
+                                    cursor: pointer;
                                 }
                                 #lower-button {
                                     text-align: center;
@@ -123,6 +126,7 @@
                                     border: 5px solid var(--black);
                                     table-layout: fixed;
                                     border-collapse: collapse;
+                                    cursor: default;
                                 }
                                 table th, td {
                                     border-left: 2px solid var(--black);

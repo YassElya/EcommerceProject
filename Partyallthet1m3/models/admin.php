@@ -14,8 +14,8 @@
         private $otpcodeisvalid;
         private $dbConnection;
         private $membershipProvider;
-        private $secretpin = '12345';
-        private $userpin;
+        private $secretpin = '95208';
+
 
         function __construct() {
 
@@ -39,17 +39,6 @@
 
         }
         
-        function verify() {
-
-            $verified = false;
-
-            $hash = password_hash($this->secretpin, PASSWORD_DEFAULT);
-
-                if (password_verify($this->userpin, $hash))
-                    $verified = true;
-
-            return $verified;
-        }
 
         function login() {
 
@@ -181,24 +170,6 @@
         public function getSecretPin() {
 
             return $this->secretpin;
-
-        }
-
-        public function setSecretPin($secretpin) {
-
-            $this->secretpin = $secretpin;
-
-        }
-        
-        public function getUserPin() {
-
-            return $this->userpin;
-
-        }
-
-        public function setUserPin($userpin) {
-
-            $this->userpin = $userpin;
 
         }
     }

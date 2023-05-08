@@ -1,46 +1,190 @@
-<?php namespace views;?>
+<?php
 
-<html>
-  <body>
+  namespace views;
 
-    <h1>Admin Registration</h1>
-    <form action="" method="post">
-      <label for="username">Username:</label><br>
-      <input type="text" id="username" name="username"><br>
-      <label for="password">Password:</label><br>
-      <input type="password" id="password" name="password"><br><br>
-      <label for="enable2fa"> Enable 2-FA?</label>
-      <input type="checkbox" id="enable2fa" name="enable2fa" value="true"><br><br>
-      <input type="submit" value="Register">
-    </form>
+  class AdminRegister {
 
-    <h2> Already registered?</h2>
-    <a href="http://localhost/EcommerceProject/Partyallthet1m3/index.php?resource=admin&action=login">Login</a>
+    private $admin;
 
-    <?php
+    function __construct($admin) {
 
-      class AdminRegister{
+      $this->admin = $admin;
 
-        private $admin;
+      if ($this->admin->getEnabled2FA()) {
 
-        function __construct($admin) {
+        if ($this->admin->login()) {
 
-          $this->admin = $admin;
+          $this->admin->getMembershipProvider()->login();
+    
+          header("location: index.php?resource=admin&action=setuptwofa");
 
-          if ($this->admin->getEnabled2FA()) {
-
-            if ($this->admin->login()) {
-
-              $this->admin->getMembershipProvider()->login();
-        
-              header("location: http://localhost/EcommerceProject/Partyallthet1m3/index.php?resource=admin&action=setuptwofa");
-
-            }
-          }
         }
+
+      } else {
+
+        $this->render();
+
       }
 
-    ?>
+    }
 
-  </body>
-</html>
+    function render() {
+
+        $html = '<html>
+                  <head>
+                      <style>
+                          :root {
+                            --black: rgba(0,2,0,1);
+                            --granite-gray: rgba(104, 104, 104, 1);
+                            --silver-chalice: rgba(175,175, 175, 1);
+                            --white: rgba(255,255,255,1);
+
+                            --font-size-m: 20px;
+
+                            --font-family-inter: "Inter";
+                          }
+                          .body {
+                            background-color: var(--silver-chalice);
+                            margin: 0;
+                            overflow: hidden;
+                          }
+                          .entire-screen {
+                            display: flex;
+                            height: 100%;
+                          }
+                          .side-bar {
+                            background-color: var(--silver-chalice);
+                            width: 250px;
+                            padding: 2px;
+                            overflow: hidden;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+                          }
+                          .side-bar-labels {
+                            background-color: var(--black);
+                            width: 225px;
+                            border-radius: 15px;
+                            margin: 12px;
+                            padding-left: 10px;
+                            vertical-align: middle;
+                            line-height: 50px;
+                            cursor: default;
+                          }
+                          .side-bar-label-text {
+                            color: var(--white);
+                            font-family: var(--font-family-inter);
+                            font-size: var(--font-size-m);
+                            font-weight: 600;
+                            font-style: normal;
+                            padding-top: 25px;
+                            padding-bottom: 25px;
+                          }
+                          .fa-section {
+                            display: flex;
+                            justify-content: space-between;
+                          }
+                          .fa-section-label {
+                            background-color: var(--black);
+                            width: 225px;
+                            border-radius: 15px;
+                            margin: 18px 12px 12px 12px;
+                            padding-left: 10px;
+                            vertical-align: middle;
+                            line-height: 50px;
+                            cursor: default;
+                          }
+                          .checkbox {
+                            width: 40px;
+                            height: 40px;
+                            margin: 22px 12px 22px 12px;
+                            cursor: pointer;
+                          }
+                          .side-bar-buttons-labels {
+                            background-color: var(--black);
+                            height: 50px;
+                            width: 235px;
+                            border-radius: 15px;
+                            margin: 12px;
+                            vertical-align: middle;
+                            line-height: 50px;
+                            color: var(--white);
+                            font-family: var(--font-family-inter);
+                            font-size: var(--font-size-m);
+                            font-weight: 600;
+                            font-style: normal;
+                            padding-bottom: 25px;
+                            border-style: none;
+                            cursor: pointer;
+                          }
+                          .modify-button-text {
+                            background-color: #454545;
+                            height: 50px;
+                            width: 235px;
+                            border-radius: 15px;
+                            padding-left: 12px;
+                            margin: 12px;
+                            vertical-align: middle;
+                            line-height: 50px;
+                            color: var(--white);
+                            font-family: var(--font-family-inter);
+                            font-size: var(--font-size-m);
+                            font-weight: 600;
+                            font-style: normal;
+                          }
+                          #lower-button {
+                            text-align: center;
+                          }
+                          .content {
+                            background-color: var(--black);
+                            margin: 10px;
+                            flex: 1;
+                          }
+                      </style>
+                  </head>
+                  
+                  <body class="body">
+                    <div class="entire-screen">
+                      <div class="side-bar">
+                        <div class="upper-buttons">
+                          <div class="side-bar-labels">
+                              <span class="side-bar-label-text">Please Register:</span>
+                          </div>
+                          </br></br>
+                          <form action="" method="post">
+                            <div class="side-bar-labels">
+                              <span class="side-bar-label-text">Username</span>
+                            </div>
+                            <input class="modify-button-text" type="text" id="username" name="username">
+                            <div class="side-bar-labels">
+                              <span class="side-bar-label-text">Password</span>
+                            </div>
+                            <input class="modify-button-text" type="password" id="password" name="password">
+                            <div class="fa-section">
+                              <div class="fa-section-label">
+                                <span class="side-bar-label-text">Enable 2-FA?</span>
+                              </div>
+                              <div class="fa-section-checkbox">
+                                <input class="checkbox" type="checkbox" id="enable2fa" name="enable2fa" value="true">
+                              </div>
+                            </div>
+                            <br><br>
+                            <input class="side-bar-buttons-labels" type="submit" value="Register">
+                          </form>
+                        </div>
+                        <div class="login-section">
+                          <button class="side-bar-buttons-labels" id="lower-button" onClick="location.assign(\'index.php?resource=admin&action=login\')">Login Here</button>
+                        </div>
+                      </div>
+                      <div class="content">
+                      </div>
+                    </div>
+                  </body>
+                </html>';
+
+          echo $html;
+
+    }
+  }
+
+?>

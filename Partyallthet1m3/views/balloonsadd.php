@@ -35,7 +35,7 @@
                 $fullBalloon = new \models\Balloon($_POST['name'], $_POST['brand'], $_POST['size'], $_POST['material'], $_POST['fill_type'], $_POST['quantity_per_bag'], $_POST['price_per_bag'], $_POST['price_per_unit'], $_POST['total_remaining']);
                 $result = $fullBalloon->addRow();
                 if ($result) {
-                    header('location: http://localhost/EcommerceProject/Partyallthet1m3/index.php?resource=balloon&action=list');
+                    header('location: index.php?resource=balloon&action=list');
                 } else {
                     echo "Error!";
                 }
@@ -81,6 +81,7 @@
                                     padding-left: 10px;
                                     vertical-align: middle;
                                     line-height: 50px;
+                                    cursor: default;
                                 }
                                 .side-bar-label-text {
                                     color: var(--white);
@@ -89,8 +90,41 @@
                                     font-weight: 600;
                                     font-style: normal;
                                 }
+                                .side-bar-labels-top {
+                                    background-color: var(--black);
+                                    height: 50px;
+                                    width: 225px;
+                                    border-radius: 15px;
+                                    margin: 12px 12px 0px 12px;
+                                    padding-left: 10px;
+                                    vertical-align: middle;
+                                    line-height: 50px;
+                                    color: var(--white);
+                                    font-family: var(--font-family-inter);
+                                    font-size: var(--font-size-m);
+                                    font-weight: 600;
+                                    font-style: normal;
+                                    text-align: left;
+                                    border-style: none;
+                                    cursor: pointer;
+                                }
                                 #lower-button {
+                                    background-color: var(--black);
+                                    height: 50px;
+                                    width: 225px;
+                                    border-radius: 15px;
+                                    margin: 12px;
+                                    vertical-align: middle;
+                                    line-height: 50px;
+                                    color: var(--white);
+                                    font-family: var(--font-family-inter);
+                                    font-size: var(--font-size-m);
+                                    font-weight: 600;
+                                    font-style: normal;
+                                    padding-bottom: 25px;
+                                    border-style: none;
                                     text-align: center;
+                                    cursor: pointer;
                                 }
                                 .content {
                                     background-color: var(--black);
@@ -116,6 +150,7 @@
                                     padding-left: 10px;
                                     vertical-align: middle;
                                     line-height: 50px;
+                                    cursor: default;
                                 }
                                 .edit-label-text {
                                     color: var(--white);
@@ -163,6 +198,7 @@
                                     font-weight: 600;
                                     font-style: normal;
                                     border-style: none;
+                                    cursor: pointer;
                                 }
                             </style>
                         </head>
@@ -171,15 +207,9 @@
                             <div class="entire-screen">
                                 <div class="side-bar">
                                     <div class="upper-buttons">
-                                        <div class="side-bar-label">
-                                            <span class="side-bar-label-text">Orders</span>
-                                        </div>
-                                        <div class="side-bar-label">
-                                            <span class="side-bar-label-text">Inventory</span>
-                                        </div>
-                                        <div class="side-bar-label">
-                                            <span class="side-bar-label-text">Clients</span>
-                                        </div>
+                                        <button class="side-bar-labels-top" onClick="location.assign(\'index.php?resource=order&action=list\')">Orders</button>
+                                        <button class="side-bar-labels-top" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Inventory</button>
+                                        <button class="side-bar-labels-top" onClick="location.assign(\'index.php?resource=client&action=list\')">Clients</button>
                                         <div class="side-bar-label">
                                             <span class="side-bar-label-text">Manage Orders</span>
                                         </div>
@@ -193,9 +223,7 @@
                                             <span class="side-bar-label-text">Reports</span>
                                         </div>
                                     </div>
-                                    <div class="side-bar-label" id="lower-button">
-                                        <span class="side-bar-label-text">Log Out</span>
-                                    </div>
+                                    <button id="lower-button" onClick="location.assign(\'index.php?resource=admin&action=logout\')">Log Out</button>
                                 </div>
                                 <div class="content">
                                     <form class="editing-section" method="post">

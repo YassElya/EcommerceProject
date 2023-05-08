@@ -10,7 +10,7 @@
 
             $this->admin = $admin;
             $this->admin->getMembershipProvider()->logout();
-            header('Location: http://localhost/EcommerceProject/Partyallthet1m3/index.php?resource=admin&action=login');
+            header('Location: index.php?resource=admin&action=login');
             
         }
     }

@@ -18,7 +18,7 @@
 
             $result = $fullClient->deleteRow($rowId);
             if ($result) {
-                header('location: http://localhost/EcommerceProject/Partyallthet1m3/index.php?resource=client&action=list');
+                header('location: index.php?resource=client&action=list');
             } else {
                 echo "Error!";
             }
