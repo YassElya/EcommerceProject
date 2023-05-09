@@ -3,7 +3,7 @@
   <head>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta charset="utf-8">
-    <title>Admin verify page</title>
+    <title>Admin Verify Page</title>
   </head>
   <body>
     <div class="center">
@@ -12,9 +12,9 @@
         <div class="txt_field">
           <input type="password" name="SecPin" required>
           <span></span>
-          <label>Secret pin</label>
+          <label>Secret Pin</label>
         </div>
-        <input type="submit" name="Verify"value="verify">
+        <input type="submit" name="verify"value="Verify">
         <div class="signup_link">
           Already have an account? <a href="index.php?resource=admin&action=login">Login</a>
         </div>
@@ -137,7 +137,7 @@ input[type="submit"]:hover{
 .signup_link a:hover{
   text-decoration: underline;
 }
-    </style>s
+    </style>
 
 
 <?php

@@ -249,7 +249,7 @@
                                         </div>
                                         <button class="side-bar-label-subtitle" onClick="">New Order</button>
                                         <button class="side-bar-label-subtitle" onClick="">Delete Order</button>
-                                        <button class="side-bar-label-solo" onClick="location.assign(\'index.php?resource=order&action=list\')">Low Stock</button>
+                                        <button class="side-bar-label-solo" onClick="location.assign(\'index.php?resource=lowstock&action=list\')">Low Stock</button>
                                         <div class="side-bar-label-title">
                                             <span class="side-bar-label-text">Past Orders:</span>
                                         </div>

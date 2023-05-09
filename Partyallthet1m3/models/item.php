@@ -124,6 +124,18 @@ class Item
         
         return $delete;
     }
+
+    function itemLowStock()
+    {
+
+        $query = "select * from items where total_remaining<=5";
+
+        $statement = $this->dbConnection->prepare($query);
+
+        $itemLowstock = $statement->execute();
+        
+        return $statement->fetchAll();
+    }
 }
 
 ?>

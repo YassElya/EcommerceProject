@@ -134,6 +134,18 @@ class Balloon
         
         return $delete;
     }
+
+    function balloonLowStock()
+    {
+
+        $query = "select * from balloons where total_remaining<=5";
+
+        $statement = $this->dbConnection->prepare($query);
+
+        $balloonLowstock = $statement->execute();
+        
+        return $statement->fetchAll();
+    }
 }
 
 ?>

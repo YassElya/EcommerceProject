@@ -2,9 +2,9 @@
 
     namespace views;
 
-    class OrdersList {
+    class LowstockList {
 
-        /*private $admin;
+        /*private $admin;            
 
         public function __construct($admin) {
 
@@ -15,7 +15,7 @@
             if (!($membershipProvider->isLoggedIn())) {
 
                 header('HTTP/1.1 401 Unauthorized');
-                header('location: http://localhost/EcommerceProject/Partyallthet1m3/index.php?resource=admin&action=login');
+                header('location: http://localhost/Partyallthet1m3/index.php?resource=admin&action=login');
 
             }
 
@@ -23,7 +23,8 @@
 
         function render(...$data) {
 
-            $orders = $data[0];
+            $balloons = $data[0];
+            $items = $data[1];
 
             $html = '<html>
                         <head>
@@ -135,6 +136,16 @@
                                     margin: 10px;
                                     flex: 1;
                                     overflow: auto;
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: space-between;
+                                }
+                                .content-buttons {
+                                    display: flex;
+                                    justify-content: space-between;
+                                }
+                                .table-div {
+                                    flex: 1;
                                 }
                                 .table {
                                     background-color: var(--white);
@@ -171,7 +182,6 @@
                         </head>
                     
                         <body class="body">
-                        
                             <div class="entire-screen">
                                 <div class="side-bar">
                                     <div>
@@ -185,55 +195,90 @@
                                         <div class="side-bar-label-title">
                                             <span class="side-bar-label-text">Manage Orders:</span>
                                         </div>
-                                        <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">New Order</button>
-                                        <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Delete Order</button>
+                                        <button class="side-bar-label-subtitle" onClick="">New Order</button>
+                                        <button class="side-bar-label-subtitle" onClick="">Delete Order</button>
                                         <button class="side-bar-label-solo" onClick="location.assign(\'index.php?resource=lowstock&action=list\')">Low Stock</button>
                                         <div class="side-bar-label-title">
                                             <span class="side-bar-label-text">Past Orders:</span>
                                         </div>
-                                        <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">All Past Orders</button>
-                                        <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Favorite Past Order</button>
+                                        <button class="side-bar-label-subtitle" onClick="">All Past Orders</button>
+                                        <button class="side-bar-label-subtitle" onClick="">Favorite Past Order</button>
                                         <div class="side-bar-label-title">
                                             <span class="side-bar-label-text">Reports:</span>
                                         </div>
-                                        <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Current Report</button>
-                                        <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Past Reports</button>
+                                        <button class="side-bar-label-subtitle" onClick="">Current Report</button>
+                                        <button class="side-bar-label-subtitle" onClick="">Past Reports</button>
                                     </div>
                                     <button class="side-bar-label-bottom" id="lower-button" onClick="location.assign(\'index.php?resource=admin&action=logout\')">Log Out</button>
                                 </div>
                                 <div class="content">
+                                    <div class="table-div">
                                     <table class="table">
                                         <tr class="heading">
-                                            <th>Order ID</th>
-                                            <th>Status ID</th>
-                                            <th>Client ID</th>
-                                            <th>Total Balloons</th>
-                                            <th>Total Items</th>
-                                            <th>Cost</th>
-                                            <th>Net Profit</th>
+                                            <th>Balloon ID</th>
+                                            <th>Name</th>
+                                            <th>Brand</th>
+                                            <th>Size</th>
+                                            <th>Material</th>
+                                            <th>Fill Type</th>
+                                            <th>Quantity per Bag</th>
+                                            <th>Price per Bag</th>
+                                            <th>Price per Unit</th>
+                                            <th>Total Left</th>
                                         </tr>';
 
-            $counter = 1;
-            foreach ($orders as $o) {
+            foreach ($balloons as $b) {
 
                 $html .= '<tr>
-                            <td>' . $o['order_id'] . '</td>
-                            <td>' . $o['status_id'] . '</td>
-                            <td>' . $o['client_id'] . '</td>
-                            <td>' . $o['total_balloons'] . '</td>
-                            <td>' . $o['total_items'] . '</td>
-                            <td>' . $o['cost'] . '</td>
-                            <td>' . $o['net_profit'] . '</td>
+                            <td>' . $b['balloon_id'] . '</td>
+                            <td>' . $b['name'] . '</td>
+                            <td>' . $b['brand'] . '</td>
+                            <td>' . $b['size'] . '</td>
+                            <td>' . $b['material'] . '</td>
+                            <td>' . $b['fill_type'] . '</td>
+                            <td>' . $b['quantity_per_bag'] . '</td>
+                            <td>' . $b['price_per_bag'] . '</td>
+                            <td>' . $b['price_per_unit'] . '</td>
+                            <td>' . $b['total_remaining'] . '</td>
                         </tr>';
-
-                $counter++;
             }
 
             $html .= '</table>
                         </div>
-                        </div>
-                        </body>
-                        </html>';
+                        <div class="table-div">
+                        <table class="table">
+                            <tr class="heading">
+                                <th>Item ID</th>
+                                <th>Name</th>
+                                <th>Brand</th>
+                                <th>Size</th>
+                                <th>Quantity per Bag</th>
+                                <th>Price per Bag</th>
+                                <th>Price per Unit</th>
+                                <th>Total Left</th>
+                            </tr>';
+
+            foreach ($items as $i) {
+
+                $html .= '<tr>
+                            <td>' . $i['item_id'] . '</td>
+                            <td>' . $i['name'] . '</td>
+                            <td>' . $i['brand'] . '</td>
+                            <td>' . $i['size'] . '</td>
+                            <td>' . $i['quantity_per_bag'] . '</td>
+                            <td>' . $i['price_per_bag'] . '</td>
+                            <td>' . $i['price_per_unit'] . '</td>
+                            <td>' . $i['total_remaining'] . '</td>
+                        </tr>';
+
+            }
+
+            $html .= '</table>
+                    </div>
+                    </div>
+                    </div>
+                    </body>
+                    </html>';
 
             echo $html;
         }

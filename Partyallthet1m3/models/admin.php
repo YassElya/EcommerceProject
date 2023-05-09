@@ -14,7 +14,6 @@
         private $otpcodeisvalid;
         private $dbConnection;
         private $membershipProvider;
-        private $secretpin = '95208';
 
 
         function __construct() {
@@ -113,6 +112,14 @@
 
         }
 
+        /*public function verify($secPin) {
+
+            echo "test";
+
+            return $secPin == $this->secretPin;
+
+        }*/
+
         public function setUsername($username) {
 
             $this->username = $username;
@@ -165,12 +172,6 @@
             
             return $this->otpcodeisvalid;
             
-        }
-
-        public function getSecretPin() {
-
-            return $this->secretpin;
-
         }
     }
 
