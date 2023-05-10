@@ -146,6 +146,17 @@ class Balloon
         
         return $statement->fetchAll();
     }
+
+    function searchBalloons($name)
+    {
+        $query = "select * from balloons where lower(name) like '%$name%'";
+
+        $statement = $this->dbConnection->prepare($query);
+
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
 }
 
 ?>

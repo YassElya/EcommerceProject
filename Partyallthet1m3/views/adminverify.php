@@ -144,7 +144,6 @@ input[type="submit"]:hover{
     class AdminVerify {
 
         private $admin;
-        private $secretPin;
         function __construct ($admin) {
 
             $this->admin = $admin;

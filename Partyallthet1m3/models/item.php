@@ -136,6 +136,17 @@ class Item
         
         return $statement->fetchAll();
     }
+
+    function searchItems($name)
+    {
+        $query = "select * from items where lower(name) like '%$name%'";
+
+        $statement = $this->dbConnection->prepare($query);
+
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
 }
 
 ?>

@@ -1,21 +1,28 @@
 <?php
-
+    
     namespace views;
 
-    class BalloonsList {
+    class OrdersAdd {
 
-        /*private $admin;            
+        /*private $user;
+        private $welcomeMessage;             
 
-        public function __construct($admin) {
+        public function __construct($user) {
 
-            $this->admin = $admin;
+            $this->user = $user;
 
-            $membershipProvider = $this->admin->getMembershipProvider();
+            echo var_dump($this->user);
 
-            if (!($membershipProvider->isLoggedIn())) {
+            $membershipProvider = $this->user->getMembershipProvider();
+
+            if ($membershipProvider->isLoggedIn()) {
+
+                $this->welcomeMessage = 'Welcome ' . $this->user->getUsername() . '!'; 
+
+            } else {
 
                 header('HTTP/1.1 401 Unauthorized');
-                header('location: http://localhost/Partyallthet1m3/index.php?resource=admin&action=login');
+                header('location: http://localhost/myApp/index.php?resource=user&action=login');
 
             }
 
@@ -23,12 +30,15 @@
 
         function render(...$data) {
 
-            $balloons = $data[0];
+            if (isset($_POST['add'])) {
 
-            if (isset($_POST['update'])) {
-                header('location: index.php?resource=balloon&action=edit&resourceid='. $_POST['updateid'] .'');
-            } else if (isset($_POST['delete'])) {
-                header('location: index.php?resource=balloon&action=delete&resourceid='. $_POST['deleteid'] .'');
+                $fullClient = new \models\Client($_POST['fname'], $_POST['lname'], $_POST['phone_num'], $_POST['email'], $_POST['instagram']);
+                $result = $fullClient->addRow();
+                if ($result) {
+                    header('location: index.php?resource=client&action=list');
+                } else {
+                    echo "Error!";
+                }
             }
 
             $html = '<html>
@@ -141,31 +151,71 @@
                                     margin: 10px;
                                     flex: 1;
                                     overflow: auto;
+                                }
+                                .editing-section {
+                                    height: 100%;
                                     display: flex;
                                     flex-direction: column;
-                                }
-                                .content-buttons {
-                                    display: flex;
                                     justify-content: space-between;
                                 }
-                                .button {
+                                .editing-row {
+                                    display: flex;
+                                }
+                                .edit-label, .completed {
                                     background-color: #454545;
                                     height: 50px;
-                                    width: 215px;
+                                    width: 400px;
                                     border-radius: 15px;
                                     margin: 12px;
-                                    text-align: center;
+                                    padding-left: 10px;
                                     vertical-align: middle;
                                     line-height: 50px;
+                                    cursor: default;
                                 }
-                                .buttons-text {
+                                .edit-label-text {
                                     color: var(--white);
                                     font-family: var(--font-family-inter);
                                     font-size: var(--font-size-m);
                                     font-weight: 600;
                                     font-style: normal;
-                                    padding-top: 25px;
-                                    padding-bottom: 25px;
+                                }
+                                .editing-label {
+                                    background-color: #454545;
+                                    height: 50px;
+                                    width: 215px;
+                                    border-radius: 15px;
+                                    margin: 12px;
+                                    padding-left: 10px;
+                                    vertical-align: middle;
+                                    line-height: 50px;
+                                }
+                                .editing-label-text {
+                                    background-color: #454545;
+                                    height: 50px;
+                                    width: 430px;
+                                    border-radius: 15px;
+                                    margin: 12px;
+                                    padding-left: 10px;
+                                    vertical-align: middle;
+                                    line-height: 50px;
+                                    color: var(--white);
+                                    font-family: var(--font-family-inter);
+                                    font-size: var(--font-size-m);
+                                    font-weight: 600;
+                                    font-style: normal;
+                                }
+                                #new-client {
+                                    margin: 0px 7px 0px 12px;
+                                }
+                                .radio-button-label {
+                                    margin: 0px 20px 0px 3px;
+                                    color: var(--white);
+                                    font-family: var(--font-family-inter);
+                                    font-size: var(--font-size-m);
+                                    font-weight: 600;
+                                    font-style: normal;
+                                    vertical-align: middle;
+                                    line-height: 72px;
                                 }
                                 .completed-text {
                                     background-color: #454545;
@@ -182,53 +232,6 @@
                                     font-style: normal;
                                     border-style: none;
                                     cursor: pointer;
-                                }
-                                .modify-button-text {
-                                    background-color: #454545;
-                                    height: 50px;
-                                    width: 75px;
-                                    border-radius: 15px;
-                                    margin: 12px;
-                                    text-align: center;
-                                    vertical-align: middle;
-                                    line-height: 50px;
-                                    color: var(--white);
-                                    font-family: var(--font-family-inter);
-                                    font-size: var(--font-size-m);
-                                    font-weight: 600;
-                                    font-style: normal;
-                                    cursor: text;
-                                }
-                                .table {
-                                    background-color: var(--white);
-                                    width: 100%;
-                                    border: 5px solid var(--black);
-                                    table-layout: fixed;
-                                    border-collapse: collapse;
-                                    cursor: default;
-                                }
-                                table th, td {
-                                    border-left: 2px solid var(--black);
-                                }
-                                table td:first-child {
-                                    border-left: none;
-                                }
-                                .heading {
-                                    background-color: #454545;
-                                    height: 75px;
-                                    font-size: var(--font-size-m);
-                                }
-                                th {
-                                    color: white;
-                                    text-align: center;
-                                    border-bottom: 2px solid var(--black);
-                                }
-                                td {
-                                    padding: 5px;
-                                    text-align: left;
-                                }
-                                tr:nth-child(even) {
-                                    background-color: #e0e0e0;
                                 }
                             </style>
                         </head>
@@ -247,80 +250,86 @@
                                         <div class="side-bar-label-title">
                                             <span class="side-bar-label-text">Manage Orders:</span>
                                         </div>
-                                        <button class="side-bar-label-subtitle" onClick="">New Order</button>
-                                        <button class="side-bar-label-subtitle" onClick="">Delete Order</button>
+                                        <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">New Order</button>
+                                        <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Delete Order</button>
                                         <button class="side-bar-label-solo" onClick="location.assign(\'index.php?resource=lowstock&action=list\')">Low Stock</button>
                                         <div class="side-bar-label-title">
                                             <span class="side-bar-label-text">Past Orders:</span>
                                         </div>
-                                        <button class="side-bar-label-subtitle" onClick="">All Past Orders</button>
-                                        <button class="side-bar-label-subtitle" onClick="">Favorite Past Order</button>
+                                        <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">All Past Orders</button>
+                                        <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Favorite Past Order</button>
                                         <div class="side-bar-label-title">
                                             <span class="side-bar-label-text">Reports:</span>
                                         </div>
-                                        <button class="side-bar-label-subtitle" onClick="">Current Report</button>
-                                        <button class="side-bar-label-subtitle" onClick="">Past Reports</button>
+                                        <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Current Report</button>
+                                        <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Past Reports</button>
                                     </div>
                                     <button class="side-bar-label-bottom" id="lower-button" onClick="location.assign(\'index.php?resource=admin&action=logout\')">Log Out</button>
                                 </div>
                                 <div class="content">
-                                    <div class="content-buttons">
+                                    <form class="editing-section" method="post">
                                         <div>
-                                            <button class="completed-text" onClick="location.assign(\'index.php?resource=balloon&action=add\')">Add</button>
-                                        </div>
-                                        <div>
-                                            <form method="post">
-                                                <input class="modify-button-text" type="text" name="updateid" value="">
-                                                <button class="completed-text" type="submit" name="update">Update Row</button>
+                                            <form action="post">
+                                                <div class="editing-row">
+                                                    <div class="edit-label">
+                                                        <span class="edit-label-text">Is this order for a new client?</span>
+                                                    </div>
+                                                    <div class="edit-label">
+                                                        <span class="edit-label-text">If yes, please fill the following section:</span>
+                                                    </div>
+                                                    <input type="radio" id="new-client" name="new-client" value="yes">
+                                                    <label class="radio-button-label" for="new-client">Yes</label>
+                                                    <input type="radio" id="new-client" name="new-client" value="no">
+                                                    <label class="radio-button-label" for="new-client">No</label>
+                                                </div>
+
                                             </form>
+
+
+
+
+                                            <div class="editing-row">
+                                                <div class="edit-label">
+                                                    <span class="edit-label-text">First Name:</span>
+                                                </div>
+                                                <input class="editing-label-text" type="text" id="fname" name="fname" value="">
+                                            </div>
+                                            <div class="editing-row">
+                                                <div class="edit-label">
+                                                    <span class="edit-label-text">Last Name:</span>
+                                                </div>
+                                                <input class="editing-label-text" type="text" id="lname" name="lname" value="">
+                                            </div>
+                                            <div class="editing-row">
+                                                <div class="edit-label">
+                                                    <span class="edit-label-text">Phone Number:</span>
+                                                </div>
+                                                <input class="editing-label-text" type="text" id="phone_num" name="phone_num" value="">
+                                            </div>
+                                            <div class="editing-row">
+                                                <div class="edit-label">
+                                                    <span class="edit-label-text">Email:</span>
+                                                </div>
+                                                <input class="editing-label-text" type="text" id="email" name="email" value="">
+                                            </div>
+                                            <div class="editing-row">
+                                                <div class="edit-label">
+                                                    <span class="edit-label-text">Instagram:</span>
+                                                </div>
+                                                <input class="editing-label-text" type="text" id="instagram" name="instagram" value="">
+                                            </div>
                                         </div>
                                         <div>
-                                            <form method="post">
-                                                <input class="modify-button-text" type="text" name="deleteid" value="">
-                                                <button class="completed-text" type="submit" name="delete">Delete Row</button>
-                                            </form>
+                                            <input class="completed-text" type="submit" name="add" value="Add Values">
                                         </div>
-                                        <div>
-                                            <button class="completed-text" onClick="location.assign(\'index.php?resource=balloon&action=search\')">Search</button>
-                                        </div>
-                                    </div>
-                                    <table class="table">
-                                        <tr class="heading">
-                                            <th>Balloon ID</th>
-                                            <th>Name</th>
-                                            <th>Brand</th>
-                                            <th>Size</th>
-                                            <th>Material</th>
-                                            <th>Fill Type</th>
-                                            <th>Quantity per Bag</th>
-                                            <th>Price per Bag</th>
-                                            <th>Price per Unit</th>
-                                            <th>Total Left</th>
-                                        </tr>';
-
-            foreach ($balloons as $b) {
-
-                $html .= '<tr>
-                            <td>' . $b['balloon_id'] . '</td>
-                            <td>' . $b['name'] . '</td>
-                            <td>' . $b['brand'] . '</td>
-                            <td>' . $b['size'] . '</td>
-                            <td>' . $b['material'] . '</td>
-                            <td>' . $b['fill_type'] . '</td>
-                            <td>' . $b['quantity_per_bag'] . '</td>
-                            <td>' . $b['price_per_bag'] . '</td>
-                            <td>' . $b['price_per_unit'] . '</td>
-                            <td>' . $b['total_remaining'] . '</td>
-                        </tr>';
-            }
-
-            $html .= '</table>
-                        </div>
-                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </body>
-                        </html>';
+                    </html>';
 
-            echo $html;
+        echo $html;
+
         }
     }
 

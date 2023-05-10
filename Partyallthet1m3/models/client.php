@@ -115,6 +115,17 @@ class Client
         return $delete;
     }
 
+    function searchClients($name)
+    {
+        $query = "select * from clients where lower(fname) like '%$name%'";
+
+        $statement = $this->dbConnection->prepare($query);
+
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
+
     function getFName() {
         return $this->fname;
     }

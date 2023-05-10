@@ -284,8 +284,8 @@
                                                         <button class="completed-text" type="submit" name="delete">Delete Row</button>
                                                     </form>
                                                 </div>
-                                                <div class="button">
-                                                    <span class="buttons-text">Search</span>
+                                                <div>
+                                                    <button class="completed-text" onClick="location.assign(\'index.php?resource=client&action=search\')">Search</button>
                                                 </div>
                                             </div>
                                             <table class="table">
