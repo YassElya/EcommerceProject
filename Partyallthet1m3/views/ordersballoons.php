@@ -1,21 +1,28 @@
 <?php
-
+    
     namespace views;
 
-    class ClientsList {
+    class BalloonsSearch {
 
-        /*private $admin;            
+        /*private $user;
+        private $welcomeMessage;             
 
-        public function __construct($admin) {
+        public function __construct($user) {
 
-            $this->admin = $admin;
+            $this->user = $user;
 
-            $membershipProvider = $this->admin->getMembershipProvider();
+            echo var_dump($this->user);
 
-            if (!($membershipProvider->isLoggedIn())) {
+            $membershipProvider = $this->user->getMembershipProvider();
+
+            if ($membershipProvider->isLoggedIn()) {
+
+                $this->welcomeMessage = 'Welcome ' . $this->user->getUsername() . '!'; 
+
+            } else {
 
                 header('HTTP/1.1 401 Unauthorized');
-                header('location: http://localhost/myApp/index.php?resource=admin&action=login');
+                header('location: http://localhost/myApp/index.php?resource=user&action=login');
 
             }
 
@@ -23,16 +30,12 @@
 
         function render(...$data) {
 
-            $clients = $data[0];
+            $balloons = $data[0];
 
-            if (isset($_POST['update'])) {
-                if($_POST['updateid']!=''){
-                    header('location: index.php?resource=client&action=edit&resourceid='. $_POST['updateid'] .'');
-                }
-            } else if (isset($_POST['delete'])) {
-                if($_POST['deleteid']!=''){
-                    header('location: index.php?resource=client&action=delete&resourceid='. $_POST['deleteid'] .'');
-                }
+            if (isset($_POST['search'])) {
+
+                $fullBalloon = new \models\Balloon();
+                $balloons = $fullBalloon->searchBalloons($_POST['searched']);
             }
 
             $html = '<html>
@@ -147,29 +150,77 @@
                                     overflow: auto;
                                     display: flex;
                                     flex-direction: column;
+                                    justify-content: start;
                                 }
-                                .content-buttons {
+                                .top-buttons {
                                     display: flex;
                                     justify-content: space-between;
                                 }
-                                .button {
+                                .search-section {
+                                    display: flex;
+                                    flex-direction: column;
+                                }
+                                .search-box {
                                     background-color: #454545;
                                     height: 50px;
-                                    width: 215px;
+                                    width: 1378px;
                                     border-radius: 15px;
                                     margin: 12px;
-                                    text-align: center;
+                                    padding-left: 8px;
                                     vertical-align: middle;
                                     line-height: 50px;
-                                }
-                                .buttons-text {
                                     color: var(--white);
                                     font-family: var(--font-family-inter);
                                     font-size: var(--font-size-m);
                                     font-weight: 600;
                                     font-style: normal;
-                                    padding-top: 25px;
-                                    padding-bottom: 25px;
+                                    cursor: text;
+                                }
+                                .editing-row {
+                                    display: flex;
+                                }
+                                .edit-label, .completed {
+                                    background-color: #454545;
+                                    height: 50px;
+                                    width: 215px;
+                                    border-radius: 15px;
+                                    margin: 12px;
+                                    padding-left: 10px;
+                                    vertical-align: middle;
+                                    line-height: 50px;
+                                    cursor: default;
+                                }
+                                .edit-label-text {
+                                    color: var(--white);
+                                    font-family: var(--font-family-inter);
+                                    font-size: var(--font-size-m);
+                                    font-weight: 600;
+                                    font-style: normal;
+                                }
+                                .editing-label {
+                                    background-color: #454545;
+                                    height: 50px;
+                                    width: 215px;
+                                    border-radius: 15px;
+                                    margin: 12px;
+                                    padding-left: 10px;
+                                    vertical-align: middle;
+                                    line-height: 50px;
+                                }
+                                .editing-label-text {
+                                    background-color: #454545;
+                                    height: 50px;
+                                    width: 430px;
+                                    border-radius: 15px;
+                                    margin: 12px;
+                                    padding-left: 10px;
+                                    vertical-align: middle;
+                                    line-height: 50px;
+                                    color: var(--white);
+                                    font-family: var(--font-family-inter);
+                                    font-size: var(--font-size-m);
+                                    font-weight: 600;
+                                    font-style: normal;
                                 }
                                 .completed-text {
                                     background-color: #454545;
@@ -186,22 +237,6 @@
                                     font-style: normal;
                                     border-style: none;
                                     cursor: pointer;
-                                }
-                                .modify-button-text {
-                                    background-color: #454545;
-                                    height: 50px;
-                                    width: 75px;
-                                    border-radius: 15px;
-                                    margin: 12px;
-                                    text-align: center;
-                                    vertical-align: middle;
-                                    line-height: 50px;
-                                    color: var(--white);
-                                    font-family: var(--font-family-inter);
-                                    font-size: var(--font-size-m);
-                                    font-weight: 600;
-                                    font-style: normal;
-                                    cursor: text;
                                 }
                                 .table {
                                     background-color: var(--white);
@@ -236,77 +271,79 @@
                                 }
                             </style>
                         </head>
-                        
+                    
                         <body class="body">
-                                    <div class="entire-screen">
-                                        <div class="side-bar">
-                                            <div>
-                                                <button class="side-bar-label-solo" onClick="location.assign(\'index.php?resource=order&action=list\')">Orders</button>
-                                                <div class="side-bar-label-title">
-                                                    <span class="side-bar-label-text">Inventory:</span>
-                                                </div>
-                                                <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Balloons</button>
-                                                <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=item&action=list\')">Items</button>
-                                                <button class="side-bar-label-solo" onClick="location.assign(\'index.php?resource=client&action=list\')">Clients</button>
-                                                <div class="side-bar-label-title">
-                                                    <span class="side-bar-label-text">Manage Orders:</span>
-                                                </div>
-                                                <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=order&action=add\')">New Order</button>
-                                                <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Delete Order</button>
-                                                <button class="side-bar-label-solo" onClick="location.assign(\'index.php?resource=lowstock&action=list\')">Low Stock</button>
-                                                <div class="side-bar-label-title">
-                                                    <span class="side-bar-label-text">Past Orders:</span>
-                                                </div>
-                                                <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">All Past Orders</button>
-                                                <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Favorite Past Order</button>
-                                                <div class="side-bar-label-title">
-                                                    <span class="side-bar-label-text">Reports:</span>
-                                                </div>
-                                                <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Current Report</button>
-                                                <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Past Reports</button>
-                                            </div>
-                                            <button class="side-bar-label-bottom" id="lower-button" onClick="location.assign(\'index.php?resource=admin&action=logout\')">Log Out</button>
+                            <div class="entire-screen">
+                                <div class="side-bar">
+                                    <div>
+                                        <button class="side-bar-label-solo" onClick="location.assign(\'index.php?resource=order&action=list\')">Orders</button>
+                                        <div class="side-bar-label-title">
+                                            <span class="side-bar-label-text">Inventory:</span>
                                         </div>
-                                        <div class="content">
-                                            <div class="content-buttons">
-                                                <div class="add-button">
-                                                    <button class="completed-text" onClick="location.assign(\'index.php?resource=client&action=add\')">Add</button>
-                                                </div>
-                                                <div class="modify-button">
-                                                    <form method="post">
-                                                        <input class="modify-button-text" type="text" name="updateid" value="">
-                                                        <button class="completed-text" type="submit" name="update">Update Row</button>
-                                                    </form>
-                                                </div>
-                                                <div class="modify-button">
-                                                    <form method="post">
-                                                        <input class="modify-button-text" type="text" name="deleteid" value="">
-                                                        <button class="completed-text" type="submit" name="delete">Delete Row</button>
-                                                    </form>
-                                                </div>
-                                                <div>
-                                                    <button class="completed-text" onClick="location.assign(\'index.php?resource=client&action=search\')">Search</button>
-                                                </div>
-                                            </div>
-                                            <table class="table">
-                                                <tr class="heading">
-                                                    <th>Client ID</th>
-                                                    <th>First Name</th>
-                                                    <th>Last Name</th>
-                                                    <th>Phone Number</th>
-                                                    <th>Email</th>
-                                                    <th>Instagram</th>
-                                                </tr>';
+                                        <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Balloons</button>
+                                        <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=item&action=list\')">Items</button>
+                                        <button class="side-bar-label-solo" onClick="location.assign(\'index.php?resource=client&action=list\')">Clients</button>
+                                        <div class="side-bar-label-title">
+                                            <span class="side-bar-label-text">Manage Orders:</span>
+                                        </div>
+                                        <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">New Order</button>
+                                        <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Delete Order</button>
+                                        <button class="side-bar-label-solo" onClick="location.assign(\'index.php?resource=lowstock&action=list\')">Low Stock</button>
+                                        <div class="side-bar-label-title">
+                                            <span class="side-bar-label-text">Past Orders:</span>
+                                        </div>
+                                        <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">All Past Orders</button>
+                                        <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Favorite Past Order</button>
+                                        <div class="side-bar-label-title">
+                                            <span class="side-bar-label-text">Reports:</span>
+                                        </div>
+                                        <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Current Report</button>
+                                        <button class="side-bar-label-subtitle" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Past Reports</button>
+                                    </div>
+                                    <button class="side-bar-label-bottom" id="lower-button" onClick="location.assign(\'index.php?resource=admin&action=logout\')">Log Out</button>
+                                </div>
+                                <div class="content">
+                                    <div class="top-buttons">
+                                        <div>
+                                            <button class="completed-text" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Back</button>
+                                        </div>
+                                        <div>
+                                            <button class="completed-text" onClick="location.assign(\'index.php?resource=balloon&action=search\')">Refresh Search</button>
+                                        </div>
+                                    </div>
+                                    <form class="search-section" method="post">
+                                        <div>
+                                            <input class="search-box" type="text" name="searched" value="">
+                                            <button class="completed-text" type="submit" name="search">Search</button>
+                                        </div>
+                                    </form>
+                                    <table class="table">
+                                        <tr class="heading">
+                                            <th>Balloon ID</th>
+                                            <th>Name</th>
+                                            <th>Brand</th>
+                                            <th>Size</th>
+                                            <th>Material</th>
+                                            <th>Fill Type</th>
+                                            <th>Quantity per Bag</th>
+                                            <th>Price per Bag</th>
+                                            <th>Price per Unit</th>
+                                            <th>Total Left</th>
+                                        </tr>';
 
-            foreach ($clients as $c) {
+            foreach ($balloons as $b) {
 
                 $html .= '<tr>
-                            <td>' . $c['client_id'] . '</td>
-                            <td>' . $c['fname'] . '</td>
-                            <td>' . $c['lname'] . '</td>
-                            <td>' . $c['phone_num'] . '</td>
-                            <td>' . $c['email'] . '</td>
-                            <td>' . $c['instagram'] . '</td>
+                            <td>' . $b['balloon_id'] . '</td>
+                            <td>' . $b['name'] . '</td>
+                            <td>' . $b['brand'] . '</td>
+                            <td>' . $b['size'] . '</td>
+                            <td>' . $b['material'] . '</td>
+                            <td>' . $b['fill_type'] . '</td>
+                            <td>' . $b['quantity_per_bag'] . '</td>
+                            <td>' . $b['price_per_bag'] . '</td>
+                            <td>' . $b['price_per_unit'] . '</td>
+                            <td>' . $b['total_remaining'] . '</td>
                         </tr>';
             }
 
@@ -317,6 +354,7 @@
                         </html>';
 
             echo $html;
+
         }
     }
 

@@ -157,6 +157,11 @@ class Balloon
 
         return $statement->fetchAll();
     }
+
+    function addBalloonsToOrder($id, $currentArr)
+    {
+
+    }
 }
 
 ?>

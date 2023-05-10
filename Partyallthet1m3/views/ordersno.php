@@ -2,7 +2,7 @@
     
     namespace views;
 
-    class OrdersAdd {
+    class OrdersNo {
 
         /*private $user;
         private $welcomeMessage;             
@@ -32,8 +32,8 @@
 
             if (isset($_POST['new-order'])) {
 
-                header('location: index.php?resource=order&action='.$_POST['new-client'].'');
-                
+                header('location: index.php?resource=order&action=balloons');
+
             }
 
             $html = '<html>
@@ -187,10 +187,10 @@
                                 .editing-label-text {
                                     background-color: #454545;
                                     height: 50px;
-                                    width: 430px;
+                                    width: 75px;
                                     border-radius: 15px;
                                     margin: 12px;
-                                    padding-left: 10px;
+                                    text-align: center;
                                     vertical-align: middle;
                                     line-height: 50px;
                                     color: var(--white);
@@ -199,7 +199,7 @@
                                     font-weight: 600;
                                     font-style: normal;
                                 }
-                                #new-client {
+                                #current-client {
                                     margin: 0px 7px 0px 12px;
                                 }
                                 .radio-button-label {
@@ -267,14 +267,11 @@
                                             <form action="post">
                                                 <div class="editing-row">
                                                     <div class="edit-label">
-                                                        <span class="edit-label-text">Is this order for a new client?</span>
+                                                        <span class="edit-label-text">Enter the exitant client\'s ID:</span>
                                                     </div>
-                                                    <input type="radio" id="new-client" name="new-client" value="yes">
-                                                    <label class="radio-button-label" for="new-client">Yes</label>
-                                                    <input type="radio" id="new-client" name="new-client" value="no">
-                                                    <label class="radio-button-label" for="new-client">No</label>
+                                                    <input class="editing-label-text" type="text" name="current-client" value="">
                                                 </div>
-                                                <input class="completed-text" type="submit" name="new-order" value="Start Order">
+                                                <input class="completed-text" type="submit" name="new-order" value="Next">
                                             </form>
                                         </div>
                                     </form>

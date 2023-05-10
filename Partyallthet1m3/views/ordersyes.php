@@ -2,7 +2,7 @@
     
     namespace views;
 
-    class OrdersAdd {
+    class OrdersYes {
 
         /*private $user;
         private $welcomeMessage;             
@@ -32,8 +32,13 @@
 
             if (isset($_POST['new-order'])) {
 
-                header('location: index.php?resource=order&action='.$_POST['new-client'].'');
-                
+                $fullClient = new \models\Client($_POST['fname'], $_POST['lname'], $_POST['phone_num'], $_POST['email'], $_POST['instagram']);
+                $result = $fullClient->addRow();
+                if ($result) {
+                    header('location: index.php?resource=order&action=balloons');
+                } else {
+                    echo "Error!";
+                }
             }
 
             $html = '<html>
@@ -264,18 +269,42 @@
                                 <div class="content">
                                     <form class="editing-section" method="post">
                                         <div>
-                                            <form action="post">
-                                                <div class="editing-row">
-                                                    <div class="edit-label">
-                                                        <span class="edit-label-text">Is this order for a new client?</span>
-                                                    </div>
-                                                    <input type="radio" id="new-client" name="new-client" value="yes">
-                                                    <label class="radio-button-label" for="new-client">Yes</label>
-                                                    <input type="radio" id="new-client" name="new-client" value="no">
-                                                    <label class="radio-button-label" for="new-client">No</label>
+                                            <div class="edit-label">
+                                                <span class="edit-label-text">Enter the new client\'s information:</span>
+                                            </div>
+                                            <div class="editing-row">
+                                                <div class="edit-label">
+                                                    <span class="edit-label-text">First Name:</span>
                                                 </div>
-                                                <input class="completed-text" type="submit" name="new-order" value="Start Order">
-                                            </form>
+                                                <input class="editing-label-text" type="text" id="fname" name="fname" value="">
+                                            </div>
+                                            <div class="editing-row">
+                                                <div class="edit-label">
+                                                    <span class="edit-label-text">Last Name:</span>
+                                                </div>
+                                                <input class="editing-label-text" type="text" id="lname" name="lname" value="">
+                                            </div>
+                                            <div class="editing-row">
+                                                <div class="edit-label">
+                                                    <span class="edit-label-text">Phone Number:</span>
+                                                </div>
+                                                <input class="editing-label-text" type="text" id="phone_num" name="phone_num" value="">
+                                            </div>
+                                            <div class="editing-row">
+                                                <div class="edit-label">
+                                                    <span class="edit-label-text">Email:</span>
+                                                </div>
+                                                <input class="editing-label-text" type="text" id="email" name="email" value="">
+                                            </div>
+                                            <div class="editing-row">
+                                                <div class="edit-label">
+                                                    <span class="edit-label-text">Instagram:</span>
+                                                </div>
+                                                <input class="editing-label-text" type="text" id="instagram" name="instagram" value="">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <input class="completed-text" type="submit" name="new-order" value="Next">
                                         </div>
                                     </form>
                                 </div>

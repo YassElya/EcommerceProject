@@ -23,7 +23,13 @@ class Order
 
         $this->dbConnection = $DBConnManager->getConnection();
 
-        if (!empty($info)) {
+        if (count($info) == 5) {
+            $this->order_id = $info[0];
+            $this->total_balloons = $info[1];
+            $this->total_items = $info[2];
+            $this->cost = $info[3];
+            $this->net_profit = $info[4];
+        } else if (!empty($info)) {
             $this->order_id = $info[0];
             $this->status_id = $info[1];
             $this->client_id = $info[2];
@@ -131,7 +137,7 @@ class Order
     function updateRow()
     {
 
-        $query = "update orders set status_id=:status_id, client_id=:client_id, total_balloons=:total_balloons, total_items=:total_items, cost=:cost, net_profit=:quantity_per_bag, price_per_bag=:net_profit where order_id=:order_id";
+        $query = "update orders set status_id=:status_id, client_id=:client_id, total_balloons=:total_balloons, total_items=:total_items, cost=:cost, net_profit=:net_profit where order_id=:order_id";
 
         $statement = $this->dbConnection->prepare($query);
 
@@ -160,6 +166,26 @@ class Order
         $delete = $statement->execute();
         
         return $delete;
+    }
+
+    function modifyOrder($id)
+    {
+
+        $query = "update orders set total_balloons=:total_balloons, total_items=:total_items, cost=:cost, net_profit=:net_profit where order_id=$id";
+
+        $statement = $this->dbConnection->prepare($query);
+
+        $modification = $statement->execute(
+            [
+                'total_balloons' => $this->total_balloons,
+                'total_items' => $this->total_items,
+                'cost' => $this->cost,
+                'net_profit' => $this->net_profit
+            ]
+        );
+        
+        return $modification;
+
     }
 }
 
