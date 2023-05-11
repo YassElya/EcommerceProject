@@ -112,13 +112,6 @@
 
         }
 
-        /*public function verify($secPin) {
-
-            echo "test";
-
-            return $secPin == $this->secretPin;
-
-        }*/
 
         public function setUsername($username) {
 

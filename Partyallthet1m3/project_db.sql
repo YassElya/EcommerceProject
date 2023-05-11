@@ -194,7 +194,7 @@ CREATE TABLE `past_orders` (
   `past_order_id` int(11) NOT NULL,
   `picture` varchar(50) NOT NULL,
   `gross_profit` decimal(10,0) NOT NULL,
-  `favorites` varchar(30) NOT NULL
+  `favorites` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
