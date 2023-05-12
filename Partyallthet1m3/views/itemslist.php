@@ -296,7 +296,6 @@
                                             <th>Total Left</th>
                                         </tr>';
 
-            $counter = 1;
             foreach ($items as $i) {
 
                 $html .= '<tr>
@@ -309,8 +308,6 @@
                             <td>' . $i['price_per_unit'] . '</td>
                             <td>' . $i['total_remaining'] . '</td>
                         </tr>';
-
-                $counter++;
             }
 
             $html .= '</table>

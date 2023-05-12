@@ -65,7 +65,7 @@
                             flex-direction: column;
                             justify-content: space-between;
                           }
-                          img {
+                          #logo {
                             margin: 10px;
                             border-radius: 50%;
                             max-width: 95%;
@@ -135,16 +135,16 @@
                   <body class="body">
                     <div class="entire-screen">
                       <div class="side-bar">
-                        <div class="logo">
-                          <img src="./assets/logo.png" alt="Avatar">
+                        <div>
+                          <img id="logo" src="./assets/logo.png" alt="Avatar">
                         </div>
                         <div class="upper-buttons">
                           <form action="" method="post">
-                            <div class="side-bar-username-pasword-labels">
+                            <div class="side-bar-labels">
                               <span class="side-bar-label-text">Username</span>
                             </div>
                             <input class="modify-button-text" type="text" id="username" name="username"><br>
-                            <div class="side-bar-username-pasword-labels">
+                            <div class="side-bar-labels">
                               <span class="side-bar-label-text">Password</span>
                             </div>
                             <input class="modify-button-text" type="password" id="password" name="password"><br><br>

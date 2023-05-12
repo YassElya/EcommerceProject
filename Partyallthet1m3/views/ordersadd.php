@@ -32,7 +32,10 @@
 
             if (isset($_POST['new-order'])) {
 
-                header('location: index.php?resource=order&action='.$_POST['new-client'].'');
+                if ($_POST['new-client'] == 'yes')
+                    header('location: index.php?resource=order&action=newclient');
+                else if ($_POST['new-client'] == 'no')
+                    header('location: index.php?resource=order&action=oldclient');
                 
             }
 
@@ -264,7 +267,7 @@
                                 <div class="content">
                                     <form class="editing-section" method="post">
                                         <div>
-                                            <form action="post">
+                                            <form id="add-order" action="post">
                                                 <div class="editing-row">
                                                     <div class="edit-label">
                                                         <span class="edit-label-text">Is this order for a new client?</span>

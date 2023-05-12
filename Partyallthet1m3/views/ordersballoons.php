@@ -2,7 +2,7 @@
     
     namespace views;
 
-    class BalloonsSearch {
+    class OrdersBalloons {
 
         /*private $user;
         private $welcomeMessage;             
@@ -30,12 +30,41 @@
 
         function render(...$data) {
 
-            $balloons = $data[0];
+            $balloons = $data[2];
+
+            $balloonsToAdd = array();
 
             if (isset($_POST['search'])) {
 
                 $fullBalloon = new \models\Balloon();
                 $balloons = $fullBalloon->searchBalloons($_POST['searched']);
+
+                //array_push($balloonsToAdd, "apple", "raspberry");
+            }
+
+            if (isset($_POST['modify'])) {
+
+                /*if (isset($_POST['remove-balloons'])) {
+
+                    $id = $_POST['remove-balloons'];
+
+                    var_dump($id);
+
+                }*/
+
+
+                foreach ($balloons as $b) {
+
+                    if (isset($_POST[''. $b['balloon_id'].'']) && !empty($_POST[''. $b['balloon_id'].''])) {
+
+                        $id = $b['balloon_id'];
+    
+                        var_dump($id);
+    
+                    }
+
+                }
+
             }
 
             $html = '<html>
@@ -152,9 +181,57 @@
                                     flex-direction: column;
                                     justify-content: start;
                                 }
-                                .top-buttons {
+                                .context-label {
+                                    background-color: var(--granite-gray2);
+                                    height: 50px;
+                                    width: 500px;
+                                    text-align: center;
+                                    border-radius: 15px;
+                                    margin: 12px 12px 0px 12px;
+                                    padding-left: 10px;
+                                    vertical-align: middle;
+                                    line-height: 50px;
+                                    cursor: default;
+                                }
+                                .edit-row {
+                                    height: 50px;
+                                    width: 1000px;
+                                    border-radius: 15px;
+                                    margin: 12px;
+                                    padding-left: 10px;
+                                    vertical-align: middle;
+                                    line-height: 50px;
+                                }
+                                #second-row {
                                     display: flex;
                                     justify-content: space-between;
+                                }
+                                #third-row {
+                                    display: flex;
+                                    justify-content: space-between;
+                                }
+                                #refresh-searches {
+                                    float: right;
+                                }
+                                #first-row {
+                                    display: flex;
+                                    justify-content: space-between;
+                                }
+                                .modify-button-text {
+                                    background-color: #454545;
+                                    height: 50px;
+                                    width: 150px;
+                                    border-radius: 15px;
+                                    margin: 12px;
+                                    text-align: center;
+                                    vertical-align: middle;
+                                    line-height: 50px;
+                                    color: var(--white);
+                                    font-family: var(--font-family-inter);
+                                    font-size: var(--font-size-m);
+                                    font-weight: 600;
+                                    font-style: normal;
+                                    cursor: text;
                                 }
                                 .search-section {
                                     display: flex;
@@ -269,6 +346,12 @@
                                 tr:nth-child(even) {
                                     background-color: #e0e0e0;
                                 }
+                                .table-text {
+                                    width: 100%;
+                                }
+                                .table-button {
+                                    width: 100%;
+                                }
                             </style>
                         </head>
                     
@@ -303,13 +386,37 @@
                                     <button class="side-bar-label-bottom" id="lower-button" onClick="location.assign(\'index.php?resource=admin&action=logout\')">Log Out</button>
                                 </div>
                                 <div class="content">
-                                    <div class="top-buttons">
+                                    <div id="first-row">
                                         <div>
-                                            <button class="completed-text" onClick="location.assign(\'index.php?resource=balloon&action=list\')">Back</button>
+                                            <button class="completed-text" onClick="location.assign(\'index.php?resource=order&action=newclient\')">Back</button>
+                                        </div>
+                                        <div class="context-label">
+                                            <span class="side-bar-label-text">Enter the balloons needed for the order:</span>
                                         </div>
                                         <div>
-                                            <button class="completed-text" onClick="location.assign(\'index.php?resource=balloon&action=search\')">Refresh Search</button>
+                                            <button class="completed-text" onClick="location.assign(\'index.php?resource=order&action=items\')">Next</button>
                                         </div>
+                                    </div>
+                                    <div id="second-row" class="edit-row">
+                                        <form method="post">
+                                            <span class="side-bar-label-text">Add</span>
+                                            <input class="modify-button-text" type="text" placeholder="number of" name="add-balloon-number" value="">
+                                            <span class="side-bar-label-text">balloons, from row</span>
+                                            <input class="modify-button-text" type="text" placeholder="row number" name="add-balloon-row" value="">
+                                            <button class="completed-text" type="submit" name="delete">to order</button>
+                                        </form>
+                                    </div>
+                                    <div id="third-row" class="edit-row">
+                                        <form method="post">
+                                            <span class="side-bar-label-text">Remove</span>
+                                            <input class="modify-button-text" type="text" placeholder="number of" name="add-balloon-number" value="">
+                                            <span class="side-bar-label-text">balloons, from row</span>
+                                            <input class="modify-button-text" type="text" placeholder="row number" name="add-balloon-row" value="">
+                                            <button class="completed-text" type="submit" name="delete">to order</button>
+                                        </form>
+                                    </div>
+                                    <div>
+                                        <button class="completed-text" id="refresh-searches" onClick="location.assign(\'index.php?resource=order&action=balloons\')">Refresh Search</button>
                                     </div>
                                     <form class="search-section" method="post">
                                         <div>

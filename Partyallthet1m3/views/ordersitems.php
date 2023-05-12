@@ -2,7 +2,7 @@
     
     namespace views;
 
-    class OrdersNo {
+    class OrdersItems {
 
         /*private $user;
         private $welcomeMessage;             
@@ -30,9 +30,40 @@
 
         function render(...$data) {
 
-            if (isset($_POST['new-order'])) {
+            $items = $data[3];
 
-                header('location: index.php?resource=order&action=balloons');
+            $balloonsToAdd = array();
+
+            if (isset($_POST['search'])) {
+
+                $fullItem = new \models\Item();
+                $items = $fullItem->searchItems($_POST['searched']);
+
+                //array_push($balloonsToAdd, "apple", "raspberry");
+            }
+
+            if (isset($_POST['modify'])) {
+
+                /*if (isset($_POST['remove-balloons'])) {
+
+                    $id = $_POST['remove-balloons'];
+
+                    var_dump($id);
+
+                }*/
+
+
+                foreach ($items as $i) {
+
+                    if (isset($_POST[''. $i['balloon_id'].'']) && !empty($_POST[''. $i['balloon_id'].''])) {
+
+                        $id = $i['balloon_id'];
+    
+                        var_dump($id);
+    
+                    }
+
+                }
 
             }
 
@@ -146,12 +177,81 @@
                                     margin: 10px;
                                     flex: 1;
                                     overflow: auto;
-                                }
-                                .editing-section {
-                                    height: 100%;
                                     display: flex;
                                     flex-direction: column;
+                                    justify-content: start;
+                                }
+                                .context-label {
+                                    background-color: var(--granite-gray2);
+                                    height: 50px;
+                                    width: 500px;
+                                    text-align: center;
+                                    border-radius: 15px;
+                                    margin: 12px 12px 0px 12px;
+                                    padding-left: 10px;
+                                    vertical-align: middle;
+                                    line-height: 50px;
+                                    cursor: default;
+                                }
+                                .edit-row {
+                                    height: 50px;
+                                    width: 1000px;
+                                    border-radius: 15px;
+                                    margin: 12px;
+                                    padding-left: 10px;
+                                    vertical-align: middle;
+                                    line-height: 50px;
+                                }
+                                #second-row {
+                                    display: flex;
                                     justify-content: space-between;
+                                }
+                                #third-row {
+                                    display: flex;
+                                    justify-content: space-between;
+                                }
+                                #refresh-searches {
+                                    float: right;
+                                }
+                                #first-row {
+                                    display: flex;
+                                    justify-content: space-between;
+                                }
+                                .modify-button-text {
+                                    background-color: #454545;
+                                    height: 50px;
+                                    width: 150px;
+                                    border-radius: 15px;
+                                    margin: 12px;
+                                    text-align: center;
+                                    vertical-align: middle;
+                                    line-height: 50px;
+                                    color: var(--white);
+                                    font-family: var(--font-family-inter);
+                                    font-size: var(--font-size-m);
+                                    font-weight: 600;
+                                    font-style: normal;
+                                    cursor: text;
+                                }
+                                .search-section {
+                                    display: flex;
+                                    flex-direction: column;
+                                }
+                                .search-box {
+                                    background-color: #454545;
+                                    height: 50px;
+                                    width: 1378px;
+                                    border-radius: 15px;
+                                    margin: 12px;
+                                    padding-left: 8px;
+                                    vertical-align: middle;
+                                    line-height: 50px;
+                                    color: var(--white);
+                                    font-family: var(--font-family-inter);
+                                    font-size: var(--font-size-m);
+                                    font-weight: 600;
+                                    font-style: normal;
+                                    cursor: text;
                                 }
                                 .editing-row {
                                     display: flex;
@@ -159,7 +259,7 @@
                                 .edit-label, .completed {
                                     background-color: #454545;
                                     height: 50px;
-                                    width: 400px;
+                                    width: 215px;
                                     border-radius: 15px;
                                     margin: 12px;
                                     padding-left: 10px;
@@ -187,10 +287,10 @@
                                 .editing-label-text {
                                     background-color: #454545;
                                     height: 50px;
-                                    width: 75px;
+                                    width: 430px;
                                     border-radius: 15px;
                                     margin: 12px;
-                                    text-align: center;
+                                    padding-left: 10px;
                                     vertical-align: middle;
                                     line-height: 50px;
                                     color: var(--white);
@@ -198,19 +298,6 @@
                                     font-size: var(--font-size-m);
                                     font-weight: 600;
                                     font-style: normal;
-                                }
-                                #current-client {
-                                    margin: 0px 7px 0px 12px;
-                                }
-                                .radio-button-label {
-                                    margin: 0px 20px 0px 3px;
-                                    color: var(--white);
-                                    font-family: var(--font-family-inter);
-                                    font-size: var(--font-size-m);
-                                    font-weight: 600;
-                                    font-style: normal;
-                                    vertical-align: middle;
-                                    line-height: 72px;
                                 }
                                 .completed-text {
                                     background-color: #454545;
@@ -227,6 +314,43 @@
                                     font-style: normal;
                                     border-style: none;
                                     cursor: pointer;
+                                }
+                                .table {
+                                    background-color: var(--white);
+                                    width: 100%;
+                                    border: 5px solid var(--black);
+                                    table-layout: fixed;
+                                    border-collapse: collapse;
+                                    cursor: default;
+                                }
+                                table th, td {
+                                    border-left: 2px solid var(--black);
+                                }
+                                table td:first-child {
+                                    border-left: none;
+                                }
+                                .heading {
+                                    background-color: #454545;
+                                    height: 75px;
+                                    font-size: var(--font-size-m);
+                                }
+                                th {
+                                    color: white;
+                                    text-align: center;
+                                    border-bottom: 2px solid var(--black);
+                                }
+                                td {
+                                    padding: 5px;
+                                    text-align: left;
+                                }
+                                tr:nth-child(even) {
+                                    background-color: #e0e0e0;
+                                }
+                                .table-text {
+                                    width: 100%;
+                                }
+                                .table-button {
+                                    width: 100%;
                                 }
                             </style>
                         </head>
@@ -262,25 +386,77 @@
                                     <button class="side-bar-label-bottom" id="lower-button" onClick="location.assign(\'index.php?resource=admin&action=logout\')">Log Out</button>
                                 </div>
                                 <div class="content">
-                                    <form class="editing-section" method="post">
+                                    <div id="first-row">
                                         <div>
-                                            <form action="post">
-                                                <div class="editing-row">
-                                                    <div class="edit-label">
-                                                        <span class="edit-label-text">Enter the exitant client\'s ID:</span>
-                                                    </div>
-                                                    <input class="editing-label-text" type="text" name="current-client" value="">
-                                                </div>
-                                                <input class="completed-text" type="submit" name="new-order" value="Next">
-                                            </form>
+                                            <button class="completed-text" onClick="location.assign(\'index.php?resource=order&action=balloons\')">Back</button>
+                                        </div>
+                                        <div class="context-label">
+                                            <span class="side-bar-label-text">Enter the items needed for the order:</span>
+                                        </div>
+                                        <div>
+                                            <button class="completed-text" onClick="location.assign(\'index.php?resource=order&action=summary\')">Next</button>
+                                        </div>
+                                    </div>
+                                    <div id="second-row" class="edit-row">
+                                        <form method="post">
+                                            <span class="side-bar-label-text">Add</span>
+                                            <input class="modify-button-text" type="text" placeholder="number of" name="add-item-number" value="">
+                                            <span class="side-bar-label-text">items, from row</span>
+                                            <input class="modify-button-text" type="text" placeholder="number" name="add-item-row" value="">
+                                            <button class="completed-text" type="submit" name="delete">to order</button>
+                                        </form>
+                                    </div>
+                                    <div id="third-row" class="edit-row">
+                                        <form method="post">
+                                            <span class="side-bar-label-text">Remove</span>
+                                            <input class="modify-button-text" type="text" placeholder="number of" name="add-item-number" value="">
+                                            <span class="side-bar-label-text">items, from row</span>
+                                            <input class="modify-button-text" type="text" placeholder="number" name="add-item-row" value="">
+                                            <button class="completed-text" type="submit" name="delete">to order</button>
+                                        </form>
+                                    </div>
+                                    <div>
+                                        <button class="completed-text" id="refresh-searches" onClick="location.assign(\'index.php?resource=order&action=balloons\')">Refresh Search</button>
+                                    </div>
+                                    <form class="search-section" method="post">
+                                        <div>
+                                            <input class="search-box" type="text" name="searched" value="">
+                                            <button class="completed-text" type="submit" name="search">Search</button>
                                         </div>
                                     </form>
-                                </div>
-                            </div>
-                        </body>
-                    </html>';
+                                    <table class="table">
+                                        <tr class="heading">
+                                            <th>Item ID</th>
+                                            <th>Name</th>
+                                            <th>Brand</th>
+                                            <th>Size</th>
+                                            <th>Quantity per Bag</th>
+                                            <th>Price per Bag</th>
+                                            <th>Price per Unit</th>
+                                            <th>Total Left</th>
+                                        </tr>';
 
-        echo $html;
+            foreach ($items as $i) {
+
+                $html .= '<tr>
+                            <td>' . $i['item_id'] . '</td>
+                            <td>' . $i['name'] . '</td>
+                            <td>' . $i['brand'] . '</td>
+                            <td>' . $i['size'] . '</td>
+                            <td>' . $i['quantity_per_bag'] . '</td>
+                            <td>' . $i['price_per_bag'] . '</td>
+                            <td>' . $i['price_per_unit'] . '</td>
+                            <td>' . $i['total_remaining'] . '</td>
+                        </tr>';
+            }
+
+            $html .= '</table>
+                        </div>
+                        </div>
+                        </body>
+                        </html>';
+
+            echo $html;
 
         }
     }

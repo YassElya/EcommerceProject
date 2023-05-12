@@ -5,8 +5,6 @@
 
     class AdminController {
         
-        private $secretPin;
-        private $secVerify;
         private $admin;
 
         function __construct() {
@@ -68,6 +66,7 @@
                             }
 
                         } else if ($action == 'register') {
+
                             if ($secVerify == 0) {
 
                                     if (isset($_POST['username']) && isset($_POST['password'])) {

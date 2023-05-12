@@ -36,6 +36,7 @@
                           :root {
                             --black: rgba(0,2,0,1);
                             --granite-gray: rgba(104, 104, 104, 1);
+                            --granite-gray2: rgba(45, 45, 45, 1);
                             --silver-chalice: rgba(175,175, 175, 1);
                             --white: rgba(255,255,255,1);
 
@@ -80,11 +81,11 @@
                             padding-top: 25px;
                             padding-bottom: 25px;
                           }
-                          .fa-section {
+                          #fa-section {
                             display: flex;
                             justify-content: space-between;
                           }
-                          .fa-section-label {
+                          #fa-section-label {
                             background-color: var(--black);
                             width: 225px;
                             border-radius: 15px;
@@ -94,7 +95,7 @@
                             line-height: 50px;
                             cursor: default;
                           }
-                          .checkbox {
+                          #checkbox {
                             width: 40px;
                             height: 40px;
                             margin: 22px 12px 22px 12px;
@@ -118,7 +119,7 @@
                             cursor: pointer;
                           }
                           .modify-button-text {
-                            background-color: #454545;
+                            background-color: var(--granite-gray2);
                             height: 50px;
                             width: 235px;
                             border-radius: 15px;
@@ -160,12 +161,12 @@
                               <span class="side-bar-label-text">Password</span>
                             </div>
                             <input class="modify-button-text" type="password" id="password" name="password">
-                            <div class="fa-section">
-                              <div class="fa-section-label">
+                            <div id="fa-section">
+                              <div id="fa-section-label">
                                 <span class="side-bar-label-text">Enable 2-FA?</span>
                               </div>
-                              <div class="fa-section-checkbox">
-                                <input class="checkbox" type="checkbox" id="enable2fa" name="enable2fa" value="true">
+                              <div>
+                                <input id="checkbox" type="checkbox" id="enable2fa" name="enable2fa" value="true">
                               </div>
                             </div>
                             <br><br>
