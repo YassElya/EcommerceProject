@@ -23,8 +23,9 @@
       } else {
 
         $this->userMessage = '<div class="alert alert-danger" role="alert">
-        You were not able to login, check your username and passowrd and try again.
-        </div>';
+                                <span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span>
+                                You were not able to login, check your username and passowrd and try again.
+                              </div>';
         $this->render();
 
       }
@@ -49,6 +50,16 @@
 
                             --font-family-inter: "Inter";
                           }
+                          .closebtn {
+                            margin-left: 15px;
+                            color: var(--black);
+                            font-weight: bold;
+                            float: right;
+                            font-size: 22px;
+                            line-height: 20px;
+                            cursor: pointer;
+                            transition: 0.3s;
+                          }
                           .body {
                             background-color: var(--silver-chalice);
                             margin: 0;
@@ -72,9 +83,9 @@
                             border-radius: 50%;
                             max-width: 95%;
                           }
-                          .side-bar-username-pasword-labels {
+                          .side-bar-labels {
                             background-color: var(--black);
-                            width: 225px;
+                            width: 235px;
                             border-radius: 15px;
                             margin: 12px;
                             padding-left: 10px;
