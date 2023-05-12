@@ -14,7 +14,7 @@
           <span></span>
           <label>Secret Pin</label>
         </div>
-        <input type="submit" name="verify"value="Verify">
+        <input type="submit" name="Verify"value="Verify">
         <div class="signup_link">
           Already have an account? <a href="index.php?resource=admin&action=login">Login</a>
         </div>

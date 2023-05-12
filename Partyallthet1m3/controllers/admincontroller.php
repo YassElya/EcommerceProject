@@ -27,17 +27,23 @@
                         if ($action == 'login') {
 
                             if (isset($_POST['username']) && isset($_POST['password'])) {
-
-                                $this->admin->setUsername($_POST['username']);
-
-                                $this->admin = $this->admin->getUserByUsername($_POST['username'])[0];
-
-                                $this->admin->setPassword($_POST['password']);
-
-                                if (isset($_POST['enable2fa']))
-                                    $this->admin->setEnabled2FA($_POST['enable2fa'] == 'true' ? true : false);
-
-                                $this->admin->$action();
+                                if($_POST['username'] == "" || $_POST['password'] == ""){
+                                    echo '<div class="alert alert-warning" role="alert">
+                                            Please insert your username and password.
+                                        </div>';
+                                }else if(empty($this->admin->getUserByUsername($_POST['username'])[0])){
+                                    echo '<div class="alert alert-danger" role="alert">
+                                    Account does not exist please register.
+                                </div>';
+                                }else{
+                                    $this->admin->setUsername($_POST['username']);
+                                    $this->admin = $this->admin->getUserByUsername($_POST['username'])[0];
+                                    $this->admin->setPassword($_POST['password']);
+                                    if (isset($_POST['enable2fa']))
+                                        $this->admin->setEnabled2FA($_POST['enable2fa'] == 'true' ? true : false);
+                                    $this->admin->$action();
+                                }
+                                
 
                             }
 
@@ -68,23 +74,21 @@
                         } else if ($action == 'register') {
 
                             if ($secVerify == 0) {
-
                                     if (isset($_POST['username']) && isset($_POST['password'])) {
-
-                                        $this->admin->setUsername($_POST['username']);
-                                        $this->admin->setPassword($_POST['password']);
-
-                                        if (isset($_POST['enable2fa']))
+                                        if($_POST['username'] == "" || $_POST['password'] == ""){
+                                            echo '<div class="alert alert-warning" role="alert">
+                                            Sorry could not register because the username or the password is not set.
+                                            </div>';
+                                        }else{
+                                            $this->admin->setUsername($_POST['username']);
+                                            $this->admin->setPassword($_POST['password']);
+                                            if (isset($_POST['enable2fa']))
                                             $this->admin->setEnabled2FA($_POST['enable2fa'] == 'true' ? true : false);
-
-                                        $this->admin->$action();
-
+                                            $this->admin->$action();
+                                        }
                                     } 
-
                             } else if ($secVerify == 1) {
-
                                 header("location: index.php?resource=admin&action=verify");
-
                             }
                             
                         } else if ($action == 'setuptwofa') {
