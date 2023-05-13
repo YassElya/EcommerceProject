@@ -30,10 +30,12 @@
 
         function render(...$data) {
 
-            if (isset($_POST['new-order'])) {
+            $clients = $data[1];
 
-                header('location: index.php?resource=order&action=balloons');
+            if (isset($_POST['search'])) {
 
+                $fullClient = new \models\Client();
+                $clients = $fullClient->searchClients($_POST['searched']);
             }
 
             $html = '<html>
@@ -145,7 +147,25 @@
                                     background-color: var(--black);
                                     margin: 10px;
                                     flex: 1;
+                                    display: flex;
+                                    flex-direction: column;
                                     overflow: auto;
+                                }
+                                .context-label {
+                                    background-color: var(--granite-gray2);
+                                    height: 50px;
+                                    width: 500px;
+                                    text-align: center;
+                                    border-radius: 15px;
+                                    margin: 12px 12px 0px 12px;
+                                    padding-left: 10px;
+                                    vertical-align: middle;
+                                    line-height: 50px;
+                                    cursor: default;
+                                }
+                                #first-row {
+                                    display: flex;
+                                    justify-content: space-between;
                                 }
                                 .editing-section {
                                     height: 100%;
@@ -159,9 +179,10 @@
                                 .edit-label, .completed {
                                     background-color: #454545;
                                     height: 50px;
-                                    width: 400px;
+                                    width: 200px;
                                     border-radius: 15px;
                                     margin: 12px;
+                                    text-align: center;
                                     padding-left: 10px;
                                     vertical-align: middle;
                                     line-height: 50px;
@@ -228,6 +249,58 @@
                                     border-style: none;
                                     cursor: pointer;
                                 }
+                                .search-section {
+                                    flex: 1;
+                                    display: flex;
+                                    flex-direction: column;
+                                }
+                                .search-box {
+                                    background-color: #454545;
+                                    height: 50px;
+                                    width: 1350px;
+                                    border-radius: 15px;
+                                    margin: 12px;
+                                    padding-left: 8px;
+                                    vertical-align: middle;
+                                    line-height: 50px;
+                                    color: var(--white);
+                                    font-family: var(--font-family-inter);
+                                    font-size: var(--font-size-m);
+                                    font-weight: 600;
+                                    font-style: normal;
+                                    cursor: text;
+                                }
+                                .table {
+                                    background-color: var(--white);
+                                    width: 100%;
+                                    border: 5px solid var(--black);
+                                    table-layout: fixed;
+                                    border-collapse: collapse;
+                                    cursor: default;
+                                }
+                                table th, td {
+                                    border-left: 2px solid var(--black);
+                                }
+                                table td:first-child {
+                                    border-left: none;
+                                }
+                                .heading {
+                                    background-color: #454545;
+                                    height: 75px;
+                                    font-size: var(--font-size-m);
+                                }
+                                th {
+                                    color: white;
+                                    text-align: center;
+                                    border-bottom: 2px solid var(--black);
+                                }
+                                td {
+                                    padding: 5px;
+                                    text-align: left;
+                                }
+                                tr:nth-child(even) {
+                                    background-color: #e0e0e0;
+                                }
                             </style>
                         </head>
                     
@@ -262,12 +335,23 @@
                                     <button class="side-bar-label-bottom" id="lower-button" onClick="location.assign(\'index.php?resource=admin&action=logout\')">Log Out</button>
                                 </div>
                                 <div class="content">
+                                    <div id="first-row">
+                                        <div>
+                                            <button class="completed-text" onClick="location.assign(\'index.php?resource=order&action=add\')">Back</button>
+                                        </div>
+                                        <div class="context-label">
+                                            <span class="side-bar-label-text">Search and enter the current client\'s ID:</span>
+                                        </div>
+                                        <div>
+                                            <button class="completed-text" onClick="location.assign(\'index.php?resource=order&action=items\')">Next</button>
+                                        </div>
+                                    </div>
                                     <form class="editing-section" method="post">
                                         <div>
                                             <form action="post">
                                                 <div class="editing-row">
                                                     <div class="edit-label">
-                                                        <span class="edit-label-text">Enter the exitant client\'s ID:</span>
+                                                        <span class="edit-label-text">Client ID:</span>
                                                     </div>
                                                     <input class="editing-label-text" type="text" name="current-client" value="">
                                                 </div>
@@ -275,12 +359,41 @@
                                             </form>
                                         </div>
                                     </form>
-                                </div>
-                            </div>
-                        </body>
-                    </html>';
+                                    <form class="search-section" method="post">
+                                        <div>
+                                            <input class="search-box" type="text" name="searched" value="">
+                                            <button class="completed-text" type="submit" name="search">Search</button>
+                                        </div>
+                                    </form>
+                                    <table class="table">
+                                        <tr class="heading">
+                                            <th>Client ID</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Phone Number</th>
+                                            <th>Email</th>
+                                            <th>Instagram</th>
+                                        </tr>';
 
-        echo $html;
+                foreach ($clients as $c) {
+
+                    $html .= '<tr>
+                                <td>' . $c['client_id'] . '</td>
+                                <td>' . $c['fname'] . '</td>
+                                <td>' . $c['lname'] . '</td>
+                                <td>' . $c['phone_num'] . '</td>
+                                <td>' . $c['email'] . '</td>
+                                <td>' . $c['instagram'] . '</td>
+                            </tr>';
+                }
+
+                $html .= '</table>
+                            </div>
+                            </div>
+                            </body>
+                            </html>';
+
+                echo $html;
 
         }
     }

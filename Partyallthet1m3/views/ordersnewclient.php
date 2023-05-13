@@ -33,7 +33,12 @@
             if (isset($_POST['newclient'])) {
 
                 $fullClient = new \models\Client($_POST['fname'], $_POST['lname'], $_POST['phone_num'], $_POST['email'], $_POST['instagram']);
-                header('location: index.php?resource=order&action=balloons');
+                $result = $fullClient->addRow();
+                if ($result) {
+                    header('location: index.php?resource=order&action=addorders');
+                } else {
+                    echo "Error!";
+                }
             }
 
             $html = '<html>

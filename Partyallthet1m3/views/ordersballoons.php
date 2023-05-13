@@ -402,7 +402,7 @@
                                             <span class="side-bar-label-text">Add</span>
                                             <input class="modify-button-text" type="text" placeholder="number of" name="add-balloon-number" value="">
                                             <span class="side-bar-label-text">balloons, from row</span>
-                                            <input class="modify-button-text" type="text" placeholder="row number" name="add-balloon-row" value="">
+                                            <input class="modify-button-text" type="text" placeholder="row" name="add-balloon-row" value="">
                                             <button class="completed-text" type="submit" name="delete">to order</button>
                                         </form>
                                     </div>
@@ -411,7 +411,7 @@
                                             <span class="side-bar-label-text">Remove</span>
                                             <input class="modify-button-text" type="text" placeholder="number of" name="add-balloon-number" value="">
                                             <span class="side-bar-label-text">balloons, from row</span>
-                                            <input class="modify-button-text" type="text" placeholder="row number" name="add-balloon-row" value="">
+                                            <input class="modify-button-text" type="text" placeholder="row" name="add-balloon-row" value="">
                                             <button class="completed-text" type="submit" name="delete">to order</button>
                                         </form>
                                     </div>
