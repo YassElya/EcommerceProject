@@ -4,7 +4,7 @@
 
     class OrdersList {
 
-        /*private $admin;
+        private $admin;            
 
         public function __construct($admin) {
 
@@ -19,7 +19,7 @@
 
             }
 
-        }*/
+        }
 
         function render(...$data) {
 

@@ -4,40 +4,39 @@
 
     class OrdersNewclient {
 
-        /*private $user;
-        private $welcomeMessage;             
+        private $admin;            
 
-        public function __construct($user) {
+        public function __construct($admin) {
 
-            $this->user = $user;
+            $this->admin = $admin;
 
-            echo var_dump($this->user);
+            $membershipProvider = $this->admin->getMembershipProvider();
 
-            $membershipProvider = $this->user->getMembershipProvider();
-
-            if ($membershipProvider->isLoggedIn()) {
-
-                $this->welcomeMessage = 'Welcome ' . $this->user->getUsername() . '!'; 
-
-            } else {
+            if (!($membershipProvider->isLoggedIn())) {
 
                 header('HTTP/1.1 401 Unauthorized');
-                header('location: http://localhost/myApp/index.php?resource=user&action=login');
+                header('location: http://localhost/EcommerceProject/Partyallthet1m3/index.php?resource=admin&action=login');
 
             }
 
-        }*/
+        }
 
         function render(...$data) {
+
+            var_dump($_SESSION);
 
             if (isset($_POST['newclient'])) {
 
                 $fullClient = new \models\Client($_POST['fname'], $_POST['lname'], $_POST['phone_num'], $_POST['email'], $_POST['instagram']);
-                $result = $fullClient->addRow();
-                if ($result) {
-                    header('location: index.php?resource=order&action=addorders');
-                } else {
-                    echo "Error!";
+
+                if (isset($_SESSION)) {
+
+                    var_dump($fullClient);
+
+                    $_SESSION['clientInOrder'] = $fullClient; 
+
+                    //header('location: index.php?resource=order&action=balloons');
+
                 }
             }
 
@@ -153,6 +152,10 @@
                                     overflow: auto;
                                     display: flex;
                                     flex-direction: column;
+                                    justify-content: space-between;
+                                }
+                                #first-row {
+                                    display: flex;
                                     justify-content: space-between;
                                 }
                                 .editing-section {
@@ -283,18 +286,18 @@
                                     <button class="side-bar-label-bottom" id="lower-button" onClick="location.assign(\'index.php?resource=admin&action=logout\')">Log Out</button>
                                 </div>
                                 <div class="content">
-                                    <form class="editing-section" method="post">
-                                        <div class="top-buttons">
-                                            <div>
-                                                <button class="completed-text" onClick="location.assign(\'index.php?resource=order&action=add\')">Back</button>
-                                            </div>
-                                            <div class="context-label">
-                                                <span class="side-bar-label-text">Enter the new client\'s information:</span>
-                                            </div>
-                                            <div>
-                                                <input class="completed-text" type="submit" name="newclient" value="Next">
-                                            </div>
+                                    <div id="first-row">
+                                        <div>
+                                            <button class="completed-text" onClick="location.assign(\'index.php?resource=order&action=add\')">Back</button>
                                         </div>
+                                        <div class="context-label">
+                                            <span class="side-bar-label-text">Enter the new client\'s information:</span>
+                                        </div>
+                                        <div>
+                                            <button class="completed-text" form="client-form" name="newclient" type="submit">Next</button>
+                                        </div>
+                                    </div>
+                                    <form class="editing-section" id="client-form" method="post">
                                         <div>
                                             <div class="editing-row">
                                                 <div class="edit-label">

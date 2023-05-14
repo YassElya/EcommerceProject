@@ -4,29 +4,22 @@
 
     class OrdersAddorders {
 
-        /*private $user;
-        private $welcomeMessage;             
+        private $admin;            
 
-        public function __construct($user) {
+        public function __construct($admin) {
 
-            $this->user = $user;
+            $this->admin = $admin;
 
-            echo var_dump($this->user);
+            $membershipProvider = $this->admin->getMembershipProvider();
 
-            $membershipProvider = $this->user->getMembershipProvider();
-
-            if ($membershipProvider->isLoggedIn()) {
-
-                $this->welcomeMessage = 'Welcome ' . $this->user->getUsername() . '!'; 
-
-            } else {
+            if (!($membershipProvider->isLoggedIn())) {
 
                 header('HTTP/1.1 401 Unauthorized');
-                header('location: http://localhost/myApp/index.php?resource=user&action=login');
+                header('location: http://localhost/EcommerceProject/Partyallthet1m3/index.php?resource=admin&action=login');
 
             }
 
-        }*/
+        }
 
         function render(...$data) {
 
@@ -388,7 +381,7 @@
                                     <button class="side-bar-label-bottom" id="lower-button" onClick="location.assign(\'index.php?resource=admin&action=logout\')">Log Out</button>
                                 </div>
                                 <div class="content">
-                                    <div>
+                                    <div id="balloons">
                                         <div id="first-row">
                                             <div>
                                                 <button class="completed-text" onClick="location.assign(\'index.php?resource=order&action=newclient\')">Back</button>
@@ -405,7 +398,7 @@
                                                 <span class="side-bar-label-text">Add</span>
                                                 <input class="modify-button-text" type="text" placeholder="number of" name="add-balloon-number" value="">
                                                 <span class="side-bar-label-text">balloons, from row</span>
-                                                <input class="modify-button-text" type="text" placeholder="row" name="add-balloon-row" value="">
+                                                <input class="modify-button-text" type="text" placeholder="number" name="add-balloon-row" value="">
                                                 <button class="completed-text" type="submit" name="delete">to order</button>
                                             </form>
                                         </div>
@@ -414,7 +407,7 @@
                                                 <span class="side-bar-label-text">Remove</span>
                                                 <input class="modify-button-text" type="text" placeholder="number of" name="add-balloon-number" value="">
                                                 <span class="side-bar-label-text">balloons, from row</span>
-                                                <input class="modify-button-text" type="text" placeholder="row" name="add-balloon-row" value="">
+                                                <input class="modify-button-text" type="text" placeholder="number" name="add-balloon-row" value="">
                                                 <button class="completed-text" type="submit" name="delete">to order</button>
                                             </form>
                                         </div>
@@ -459,28 +452,22 @@
 
             $html .= '</table>
                         </div>
-                        <div>
-                            <div class="second-row edit-row">
-                                <div id="first-row">
-                                    <div>
-                                        <button class="completed-text" onClick="location.assign(\'index.php?resource=order&action=balloons\')">Back</button>
-                                    </div>
-                                    <div class="context-label">
-                                        <span class="side-bar-label-text">Enter the items needed for the order:</span>
-                                    </div>
-                                    <div>
-                                        <button class="completed-text" onClick="location.assign(\'index.php?resource=order&action=summary\')">Next</button>
-                                    </div>
+                        <div id="items">
+                            <div id="first-row">
+                                <div class="context-label" >
+                                    <span class="side-bar-label-text">Enter the items needed for the order:</span>
                                 </div>
                             </div>
-                            <div>
-                                <form method="post">
-                                    <span class="side-bar-label-text">Add</span>
-                                    <input class="modify-button-text" type="text" placeholder="number of" name="add-item-number" value="">
-                                    <span class="side-bar-label-text">items, from row</span>
-                                    <input class="modify-button-text" type="text" placeholder="number" name="add-item-row" value="">
-                                    <button class="completed-text" type="submit" name="delete">to order</button>
-                                </form>
+                            <div class="second-row edit-row">
+                                <div>
+                                    <form method="post">
+                                        <span class="side-bar-label-text">Add</span>
+                                        <input class="modify-button-text" type="text" placeholder="number of" name="add-item-number" value="">
+                                        <span class="side-bar-label-text">items, from row</span>
+                                        <input class="modify-button-text" type="text" placeholder="number" name="add-item-row" value="">
+                                        <button class="completed-text" type="submit" name="delete">to order</button>
+                                    </form>
+                                </div>
                             </div>
                             <div class="third-row edit-row">
                                 <form method="post">

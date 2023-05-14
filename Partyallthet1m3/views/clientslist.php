@@ -4,7 +4,7 @@
 
     class ClientsList {
 
-        /*private $admin;            
+        private $admin;            
 
         public function __construct($admin) {
 
@@ -15,11 +15,11 @@
             if (!($membershipProvider->isLoggedIn())) {
 
                 header('HTTP/1.1 401 Unauthorized');
-                header('location: http://localhost/myApp/index.php?resource=admin&action=login');
+                header('location: http://localhost/EcommerceProject/Partyallthet1m3/index.php?resource=admin&action=login');
 
             }
 
-        }*/
+        }
 
         function render(...$data) {
 

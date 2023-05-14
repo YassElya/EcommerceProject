@@ -51,9 +51,7 @@
 
         function logout() {
 
-            $_SESSION = array();
-
-            session_destroy ();
+            session_destroy();
 
             setcookie('pattadmin', $this->admin->getUsername(), time()-3600);
 

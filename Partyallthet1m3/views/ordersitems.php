@@ -4,29 +4,22 @@
 
     class OrdersItems {
 
-        /*private $user;
-        private $welcomeMessage;             
+        private $admin;            
 
-        public function __construct($user) {
+        public function __construct($admin) {
 
-            $this->user = $user;
+            $this->admin = $admin;
 
-            echo var_dump($this->user);
+            $membershipProvider = $this->admin->getMembershipProvider();
 
-            $membershipProvider = $this->user->getMembershipProvider();
-
-            if ($membershipProvider->isLoggedIn()) {
-
-                $this->welcomeMessage = 'Welcome ' . $this->user->getUsername() . '!'; 
-
-            } else {
+            if (!($membershipProvider->isLoggedIn())) {
 
                 header('HTTP/1.1 401 Unauthorized');
-                header('location: http://localhost/myApp/index.php?resource=user&action=login');
+                header('location: http://localhost/EcommerceProject/Partyallthet1m3/index.php?resource=admin&action=login');
 
             }
 
-        }*/
+        }
 
         function render(...$data) {
 
@@ -34,37 +27,64 @@
 
             $balloonsToAdd = array();
 
-            if (isset($_POST['search'])) {
+            var_dump($_SESSION);
 
-                $fullItem = new \models\Item();
-                $items = $fullItem->searchItems($_POST['searched']);
+            if (isset($_POST['add'])) {
 
-                //array_push($balloonsToAdd, "apple", "raspberry");
-            }
+                if (isset($_POST['add-balloon-number']) && isset($_POST['add-balloon-row'])) {
 
-            if (isset($_POST['modify'])) {
+                    $balloonAmount = $_POST['add-balloon-number'];
+                    $balloonID = $_POST['add-balloon-row'];
 
-                /*if (isset($_POST['remove-balloons'])) {
+                    $fullBalloon = new \models\Balloon();
+                    $result = $fullBalloon->getRow($balloonID);
+                    
+                    if ($result) {
 
-                    $id = $_POST['remove-balloons'];
+                        $balloonsToAdd[] = array($result, $balloonAmount);
 
-                    var_dump($id);
+                        if (isset($_SESSION)) {
 
-                }*/
+                            if ($balloonAmount == 1 && $balloonID == 1) {
 
+                                $_SESSION['balloonsInOrder'] = array();
 
-                foreach ($items as $i) {
+                            } else if (isset($_SESSION['balloonsInOrder'])) {
 
-                    if (isset($_POST[''. $i['balloon_id'].'']) && !empty($_POST[''. $i['balloon_id'].''])) {
-
-                        $id = $i['balloon_id'];
+                                $currentOrder = $_SESSION['balloonsInOrder'];
     
-                        var_dump($id);
+                                array_push($currentOrder, $balloonsToAdd[0]);
+                                $_SESSION['balloonsInOrder'] = $currentOrder;
+
+                                var_dump($_SESSION['balloonsInOrder']);
     
+                            } else {
+    
+                                $_SESSION['balloonsInOrder'] = $balloonsToAdd[0];
+    
+                                var_dump($_SESSION['balloonsInOrder']);
+    
+                            }
+
+                        }
+
                     }
 
                 }
 
+            }
+
+            if (isset($_POST['refresh-order'])) {
+
+                $_SESSION['balloonsInOrder'] = array();
+
+            }
+
+            if (isset($_POST['search'])) {
+
+                $fullItem = new \models\Item();
+                $items = $fullItem->searchItems($_POST['searched']);
+                
             }
 
             $html = '<html>
@@ -195,20 +215,22 @@
                                 }
                                 .edit-row {
                                     height: 50px;
-                                    width: 1000px;
-                                    border-radius: 15px;
-                                    margin: 12px;
-                                    padding-left: 10px;
-                                    vertical-align: middle;
-                                    line-height: 50px;
+                                    margin-bottom: 20px;
+                                    padding-left: 20px;
                                 }
                                 #second-row {
                                     display: flex;
                                     justify-content: space-between;
                                 }
+                                #add-text {
+                                    margin: 16px 16px;
+                                }
                                 #third-row {
                                     display: flex;
                                     justify-content: space-between;
+                                }
+                                #refresh-order {
+                                    float: right;
                                 }
                                 #refresh-searches {
                                     float: right;
@@ -399,11 +421,14 @@
                                     </div>
                                     <div id="second-row" class="edit-row">
                                         <form method="post">
-                                            <span class="side-bar-label-text">Add</span>
+                                            <span class="side-bar-label-text" id="add-text">Add</span>
                                             <input class="modify-button-text" type="text" placeholder="number of" name="add-item-number" value="">
                                             <span class="side-bar-label-text">items, from row</span>
                                             <input class="modify-button-text" type="text" placeholder="number" name="add-item-row" value="">
                                             <button class="completed-text" type="submit" name="delete">to order</button>
+                                        </form>
+                                        <form method="post">
+                                            <button class="completed-text" id="refresh-order" name="refresh-order" type="submit">Restart Order</button>
                                         </form>
                                     </div>
                                     <div id="third-row" class="edit-row">

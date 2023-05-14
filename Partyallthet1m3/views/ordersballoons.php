@@ -4,29 +4,22 @@
 
     class OrdersBalloons {
 
-        /*private $user;
-        private $welcomeMessage;             
+        private $admin;            
 
-        public function __construct($user) {
+        public function __construct($admin) {
 
-            $this->user = $user;
+            $this->admin = $admin;
 
-            echo var_dump($this->user);
+            $membershipProvider = $this->admin->getMembershipProvider();
 
-            $membershipProvider = $this->user->getMembershipProvider();
-
-            if ($membershipProvider->isLoggedIn()) {
-
-                $this->welcomeMessage = 'Welcome ' . $this->user->getUsername() . '!'; 
-
-            } else {
+            if (!($membershipProvider->isLoggedIn())) {
 
                 header('HTTP/1.1 401 Unauthorized');
-                header('location: http://localhost/myApp/index.php?resource=user&action=login');
+                header('location: http://localhost/EcommerceProject/Partyallthet1m3/index.php?resource=admin&action=login');
 
             }
 
-        }*/
+        }
 
         function render(...$data) {
 
@@ -34,36 +27,55 @@
 
             $balloonsToAdd = array();
 
+            var_dump($_SESSION);
+
+            if (isset($_POST['add'])) {
+
+                if (isset($_POST['add-balloon-number']) && isset($_POST['add-balloon-row'])) {
+
+                    $balloonAmount = $_POST['add-balloon-number'];
+                    $balloonID = $_POST['add-balloon-row'];
+
+                    $fullBalloon = new \models\Balloon();
+                    $result = $fullBalloon->getRow($balloonID);
+                    
+                    if ($result) {
+
+                        $balloonsToAdd[] = array($result, $balloonAmount);
+
+                        if (isset($_SESSION)) {
+
+                            if (isset($_SESSION['balloonsInOrder'])) {
+
+                                $currentOrder = $_SESSION['balloonsInOrder'];
+    
+                                array_push($currentOrder, $balloonsToAdd[0]);
+                                $_SESSION['balloonsInOrder'] = $currentOrder;
+    
+                            } else {
+    
+                                $_SESSION['balloonsInOrder'] = $balloonsToAdd[0];
+    
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+            if (isset($_POST['refresh-order'])) {
+
+                $_SESSION['balloonsInOrder'] = array();
+
+            }
+
             if (isset($_POST['search'])) {
 
                 $fullBalloon = new \models\Balloon();
                 $balloons = $fullBalloon->searchBalloons($_POST['searched']);
-
-                //array_push($balloonsToAdd, "apple", "raspberry");
-            }
-
-            if (isset($_POST['modify'])) {
-
-                /*if (isset($_POST['remove-balloons'])) {
-
-                    $id = $_POST['remove-balloons'];
-
-                    var_dump($id);
-
-                }*/
-
-
-                foreach ($balloons as $b) {
-
-                    if (isset($_POST[''. $b['balloon_id'].'']) && !empty($_POST[''. $b['balloon_id'].''])) {
-
-                        $id = $b['balloon_id'];
-    
-                        var_dump($id);
-    
-                    }
-
-                }
 
             }
 
@@ -195,20 +207,22 @@
                                 }
                                 .edit-row {
                                     height: 50px;
-                                    width: 1000px;
-                                    border-radius: 15px;
-                                    margin: 12px;
-                                    padding-left: 10px;
-                                    vertical-align: middle;
-                                    line-height: 50px;
+                                    margin-bottom: 20px;
+                                    padding-left: 20px;
                                 }
                                 #second-row {
                                     display: flex;
                                     justify-content: space-between;
                                 }
+                                #add-text {
+                                    margin: 16px 16px;
+                                }
                                 #third-row {
                                     display: flex;
                                     justify-content: space-between;
+                                }
+                                #refresh-order {
+                                    float: right;
                                 }
                                 #refresh-searches {
                                     float: right;
@@ -399,11 +413,14 @@
                                     </div>
                                     <div id="second-row" class="edit-row">
                                         <form method="post">
-                                            <span class="side-bar-label-text">Add</span>
+                                            <span class="side-bar-label-text" id="add-text">Add</span>
                                             <input class="modify-button-text" type="text" placeholder="number of" name="add-balloon-number" value="">
                                             <span class="side-bar-label-text">balloons, from row</span>
                                             <input class="modify-button-text" type="text" placeholder="row" name="add-balloon-row" value="">
-                                            <button class="completed-text" type="submit" name="delete">to order</button>
+                                            <button class="completed-text" type="submit" name="add">to order</button>
+                                        </form>
+                                        <form method="post">
+                                            <button class="completed-text" id="refresh-order" name="refresh-order" type="submit">Restart Order</button>
                                         </form>
                                     </div>
                                     <div id="third-row" class="edit-row">
@@ -415,10 +432,10 @@
                                             <button class="completed-text" type="submit" name="delete">to order</button>
                                         </form>
                                     </div>
-                                    <div>
-                                        <button class="completed-text" id="refresh-searches" onClick="location.assign(\'index.php?resource=order&action=balloons\')">Refresh Search</button>
-                                    </div>
                                     <form class="search-section" method="post">
+                                        <div>
+                                            <button class="completed-text" id="refresh-searches" onClick="location.assign(\'index.php?resource=order&action=balloons\')">Refresh Search</button>
+                                        </div>
                                         <div>
                                             <input class="search-box" type="text" name="searched" value="">
                                             <button class="completed-text" type="submit" name="search">Search</button>
