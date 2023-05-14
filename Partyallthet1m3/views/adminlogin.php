@@ -11,10 +11,8 @@
 
       $this->admin = $admin;
 
-      if ($this->admin->login()) {
-
-        $this->admin->getMembershipProvider()->login();
-
+        $membershipProvider = $this->admin->getMembershipProvider();
+        if($membershipProvider->isLoggedIn()){
         if ($this->admin->getEnabled2FA())
           header('Location: index.php?resource=admin&action=validatecode');
         else

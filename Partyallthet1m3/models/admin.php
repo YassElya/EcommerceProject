@@ -39,18 +39,17 @@
         }
         
 
-        function login() {
+        function login(){
 
-            $verified = false;
+        $dbPassword = $this->getPasswordByUsername();
 
-            $dbPassword = $this->getPasswordByUsername();
+        if(password_verify($this->password, $dbPassword)){
 
-            if (password_verify($this->password, $dbPassword))
-                $verified = true;
-
-            return $verified;
+            $this->membershipProvider->login();
 
         }
+        
+    }
 
         function logout() {
 
