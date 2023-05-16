@@ -16,7 +16,7 @@
 
         function render() {
 
-            $qrcodeimageURL= \TokenAuth6238::getBarCodeUrl($this->admin->getUsername(), 'localhost', $this->admin->getOTPsecretkey(), 'EcommerceProject-main');
+            $qrcodeimageURL= \TokenAuth6238::getBarCodeUrl($this->admin->getUsername(), 'localhost', $this->admin->getOTPsecretkey(), 'Partyallthet1m3');
 
             $html = '<html>
                         <head>
@@ -137,18 +137,11 @@
                                     </div>
                                     </br>
                                     <div class="side-bar-labels">
-                                        <span class="side-bar-label-text">Google:</span>
-                                    </div>
-                                    <div class="side-bar-labels">
-                                        <span class="link-text">https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_CA&gl=US&pli=1</span>
-                                        <link class="side-bar-label-text" href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_CA&gl=US&pli=1">
+                                        <a class="side-bar-label-text" href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_CA&gl=US&pli=1">Download on Google</a>
                                     </div>
                                     </br>
                                     <div class="side-bar-labels">
-                                        <span class="side-bar-label-text">Microsoft:</span>
-                                    </div>
-                                    <div class="side-bar-labels">
-                                        <span class="side-bar-label-text">https://apps.apple.com/us/app/microsoft-authenticator/id983156458</span>
+                                        <a class="side-bar-label-text" href="https://apps.apple.com/us/app/microsoft-authenticator/id983156458">Download on Apple</a>
                                     </div>
                                     <img id="qr-code" src='.$qrcodeimageURL.' alt=QR Code/>
                                 </div>
