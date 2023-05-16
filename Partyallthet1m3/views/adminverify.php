@@ -148,8 +148,6 @@ input[type="submit"]:hover{
 
             $this->admin = $admin;
 
-            var_dump($this->admin);
-
             if ($this->admin->verify()) {
 
                 echo 'Verified Successfully';

@@ -214,6 +214,7 @@
                                     cursor: pointer;
                                 }
                             </style>
+                            <title>Balloon adding</title>
                         </head>
                     
                         <body class="body">

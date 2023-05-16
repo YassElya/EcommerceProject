@@ -23,7 +23,6 @@
 
         function render(...$data) {
 
-            var_dump($_SESSION);
 
             if (isset($_POST['newclient'])) {
 

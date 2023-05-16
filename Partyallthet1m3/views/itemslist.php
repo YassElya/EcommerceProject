@@ -26,9 +26,21 @@
             $items = $data[0];
 
             if (isset($_POST['update'])) {
-                header('location: index.php?resource=item&action=edit&resourceid='. $_POST['updateid'] .'');
+                if(preg_match('/^[0-9]*$/', $_POST['updateid']) && $_POST['updateid']!= null){
+                    header('location: index.php?resource=client&action=edit&resourceid='. $_POST['updateid'] .'');
+                }else{
+                    echo '<div class="alert alert-warning" role="alert">
+                    Only numbers in this field.
+                  </div>';
+                }
             } else if (isset($_POST['delete'])) {
-                header('location: index.php?resource=item&action=delete&resourceid='. $_POST['deleteid'] .'');
+                if(preg_match('/^[0-9]*$/', $_POST['deleteid']) && $_POST['deleteid']!= null){
+                header('location: index.php?resource=client&action=delete&resourceid='. $_POST['deleteid'] .'');
+                }else{
+                    echo '<div class="alert alert-warning" role="alert">
+                    Only numbers in this field.
+                  </div>';
+                }
             }
 
             $html = '<html>
@@ -231,6 +243,7 @@
                                     background-color: #e0e0e0;
                                 }
                             </style>
+                            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
                         </head>
                     
                         <body class="body">

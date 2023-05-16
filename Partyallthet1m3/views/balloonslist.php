@@ -24,13 +24,27 @@
         function render(...$data) {
 
             $balloons = $data[0];
-
             $GLOBALS['client'] = "testing something";
-
+            
             if (isset($_POST['update'])) {
-                header('location: index.php?resource=balloon&action=edit&resourceid='. $_POST['updateid'] .'');
+                if(preg_match('/^[0-9]*$/', $_POST['updateid']) && $_POST['updateid']!= null){
+                    header('location: index.php?resource=balloon&action=edit&resourceid='. $_POST['updateid'] .'');
+                }else{
+                    echo '<div class="alert alert-warning" role="alert">
+                    Only numbers in this field.
+                  </div>';
+                }
             } else if (isset($_POST['delete'])) {
+                if(preg_match('/^[0-9]*$/', $_POST['deleteid']) && $_POST['deleteid']!= null){
                 header('location: index.php?resource=balloon&action=delete&resourceid='. $_POST['deleteid'] .'');
+                }else{
+                    echo '<div class="alert alert-warning" role="alert">
+                    Only numbers in this field.
+                  </div>';
+                }
+            } else if (isset($_POST['sort'])) {
+                $fullBalloon = new \models\Balloon();
+                $balloons = $fullBalloon->sortByName();
             }
 
             $html = '<html>
@@ -233,6 +247,8 @@
                                     background-color: #e0e0e0;
                                 }
                             </style>
+                            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+                            <title>Balloons list</title>
                         </head>
                     
                         <body class="body">
@@ -283,6 +299,12 @@
                                             </form>
                                         </div>
                                         <div>
+                                            <form method="post">
+                                                <!--<input class="modify-button-text" type="text" name="sortTable" value="">!-->
+                                                <button class="completed-text" type="submit" name="sort">Sort table</button>
+                                            </form>
+                                        </div>
+                                        <div>
                                             <button class="completed-text" onClick="location.assign(\'index.php?resource=balloon&action=search\')">Search</button>
                                         </div>
                                     </div>
@@ -301,7 +323,7 @@
                                         </tr>';
 
             foreach ($balloons as $b) {
-
+                
                 $html .= '<tr>
                             <td>' . $b['balloon_id'] . '</td>
                             <td>' . $b['name'] . '</td>

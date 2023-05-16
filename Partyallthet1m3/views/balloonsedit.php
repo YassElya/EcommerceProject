@@ -226,6 +226,7 @@
                                     cursor: pointer;
                                 }
                             </style>
+                            <title>Edit balloon</title>
                         </head>
                     
                         <body class="body">
