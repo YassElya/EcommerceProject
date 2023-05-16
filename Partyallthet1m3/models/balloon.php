@@ -162,6 +162,13 @@ class Balloon
     {
 
     }
+
+    function sortByName(){
+        $query = "SELECT * FROM balloons ORDER BY name asc";
+        $statement = $this->dbConnection->prepare($query);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
 }
 
 ?>

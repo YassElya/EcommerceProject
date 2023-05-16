@@ -263,6 +263,7 @@
                                     background-color: #e0e0e0;
                                 }
                             </style>
+                            <title>Balloon search</title>
                         </head>
                     
                         <body class="body">

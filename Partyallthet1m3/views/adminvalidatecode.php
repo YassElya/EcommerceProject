@@ -140,6 +140,7 @@
                                 flex: 1;
                               }
                           </style>
+                          <title>Validate code</title>
                       </head>
                       
                       <body class="body">

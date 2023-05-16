@@ -85,8 +85,10 @@
                                             if (isset($_POST['enable2fa']))
                                             $this->admin->setEnabled2FA($_POST['enable2fa'] == 'true' ? true : false);
                                             $this->admin->$action();
+                                            header("location: index.php?resource=admin&action=login");
+
                                         }
-                                    } 
+                                    }
                             } else if ($secVerify == 1) {
                                 header("location: index.php?resource=admin&action=verify");
                             }

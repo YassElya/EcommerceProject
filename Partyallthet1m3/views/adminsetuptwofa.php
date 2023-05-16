@@ -126,6 +126,7 @@
                                     flex: 1;
                                 }
                             </style>
+                            <title>Set up twoFA</title>
                         </head>
                         
                         <body class="body">
